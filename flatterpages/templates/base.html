@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <style>
+      #id_head_content, #id_main_content, #id_css, #id_footer_content {
+        display: none;
+      }
+      #editor_id_head_content, #editor_id_main_content, #editor_id_css, #editor_id_footer_content {
+        height: 200px;
+        width: 1000px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form action="" method="POST" encytype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_title">Page Title</label>
+        {{ form.title }}
+        <br/>
+
+        <label for="id_slug">URL Slug</label>
+        {{ form.slug }}
+        <br/>
+
+        <label for="id_meta_description">Meta Description</label><br/>
+        {{ form.meta_description }}
+        <br/>
+
+        <label for="id_head_content">Head Content</label>
+        {{ form.head_content }}
+        <div id="editor_id_head_content"></div>
+        <br/>
+
+        <label for="id_main_content">Main Content</label>
+        {{ form.main_content }}
+        <div id="editor_id_main_content"></div>
+        <br/>
+
+        <label for="id_css">CSS</label>
+        {{ form.css }}
+        <div id="editor_id_css"></div>
+        <br/>
+
+        <label for="id_footer_content">Footer Content</label>
+        {{ form.footer_content }}
+        <div id="editor_id_footer_content"></div>
+        <br/>
+
+        <label for="id_head_content">Sites</label><br/>
+        {{ form.sites }}
+        <br/>
+
+        <label for="id_head_content">Comments</label>
+        {{ form.comments }}
+        <br/>
+
+        <label for="id_head_content">Page Template</label>
+        {{ form.template }}
+        <br/>
+
+      </form>
+
+    </div>
+
+    <script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        var aceHeadContent = ace.edit("editor_id_head_content");
+        var djangoHeadContent = document.getElementById("id_head_content");
+        aceHeadContent.setTheme("ace/theme/monokai");
+        aceHeadContent.getSession().setMode("ace/mode/html");
+        aceHeadContent.getSession().setValue(djangoHeadContent.value);
+        aceHeadContent.getSession().on('change', function(){
+            djangoHeadContent.value = aceHeadContent.getSession().getValue();
+        });
+    </script>
+
+    <script type="text/javascript">
+        var aceMainContent = ace.edit("editor_id_main_content");
+        var djangoMainContent = document.getElementById("id_main_content");
+        aceMainContent.setTheme("ace/theme/monokai");
+        aceMainContent.getSession().setMode("ace/mode/html");
+        aceMainContent.getSession().setValue(djangoMainContent.value);
+        aceMainContent.getSession().on('change', function(){
+            djangoMainContent.value = aceMainContent.getSession().getValue();
+        });
+    </script>
+
+    <script type="text/javascript">
+        var aceCSS = ace.edit("editor_id_css");
+        var djangoCSS = document.getElementById("id_css");
+        aceCSS.setTheme("ace/theme/monokai");
+        aceCSS.getSession().setMode("ace/mode/css");
+        aceCSS.getSession().setValue(djangoCSS.value);
+        aceCSS.getSession().on('change', function(){
+            djangoCSS.value = aceCSS.getSession().getValue();
+        });
+    </script>
+
+    <script type="text/javascript">
+        var aceFooterContent = ace.edit("editor_id_footer_content");
+        var djangoFooterContent = document.getElementById("id_footer_content");
+        aceFooterContent.setTheme("ace/theme/monokai");
+        aceFooterContent.getSession().setMode("ace/mode/html");
+        aceFooterContent.getSession().setValue(djangoFooterContent.value);
+        aceFooterContent.getSession().on('change', function(){
+            djangoFooterContent.value = aceFooterContent.getSession().getValue();
+        });
+    </script>
+  </body>
+</html>

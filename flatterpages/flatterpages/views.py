@@ -8,8 +8,7 @@ def create_page(request):
 	if request.method == 'POST':
 		form = PageForm(request.POST)
 		if form.is_valid():
-
-			return derp
+			form.save()
 
 	else:
 		form = PageForm()

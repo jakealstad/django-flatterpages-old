@@ -25,3 +25,7 @@ class PageForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(PageForm, self).__init__(*args, **kwargs)
+
+	def save(self, commit=True):
+		instance = super(PageForm, self).save(commit=commit)
+		return instance

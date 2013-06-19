@@ -19,49 +19,68 @@
 
       <form action="" method="POST" encytype="multipart/form-data">
         {% csrf_token %}
+        <div class="error" style="display:none;"></div>
+
         <label for="id_title">Page Title</label>
+        {{ form.title.errors }}
         {{ form.title }}
         <br/>
 
         <label for="id_slug">URL Slug</label>
+        {{ form.slug.errors }}
         {{ form.slug }}
         <br/>
 
         <label for="id_meta_description">Meta Description</label><br/>
+        {{ form.meta_description.errors }}
         {{ form.meta_description }}
         <br/>
 
+        <label for="id_main_image">Main Image</label><br/>
+        {{ form.main_image.errors }}
+        {{ form.main_image }}
+        <br/>
+
         <label for="id_head_content">Head Content</label>
+        {{ form.head_content.errors }}
         {{ form.head_content }}
         <div id="editor_id_head_content"></div>
         <br/>
 
         <label for="id_main_content">Main Content</label>
+        {{ form.main_content.errors }}
         {{ form.main_content }}
         <div id="editor_id_main_content"></div>
         <br/>
 
         <label for="id_css">CSS</label>
+        {{ form.css.errors }}
         {{ form.css }}
         <div id="editor_id_css"></div>
         <br/>
 
         <label for="id_footer_content">Footer Content</label>
+        {{ form.footer_content.errors }}
         {{ form.footer_content }}
         <div id="editor_id_footer_content"></div>
         <br/>
 
         <label for="id_head_content">Sites</label><br/>
+        {{ form.sites.errors }}
         {{ form.sites }}
         <br/>
 
         <label for="id_head_content">Comments</label>
+        {{ form.comments.errors }}
         {{ form.comments }}
         <br/>
 
         <label for="id_head_content">Page Template</label>
+        {{ form.template.errors }}
         {{ form.template }}
         <br/>
+
+        <button type="submit">Save</button>
 
       </form>
 

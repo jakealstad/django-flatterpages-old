@@ -3,14 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-     <style>
-      #id_head_content, #id_main_content, #id_css, #id_footer_content {
-        display: none;
-      }
-      #editor_id_head_content, #editor_id_main_content, #editor_id_css, #editor_id_footer_content {
-        height: 200px;
-        width: 1000px;
-      }
+    {{ page.head_content|render }}
+    <style>
+      {{ page.css|render }}
     </style>
   </head>
 

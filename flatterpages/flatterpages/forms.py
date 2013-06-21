@@ -20,7 +20,8 @@ class PageForm(forms.ModelForm):
 			'footer_content',
 			'sites',
 			'comments',
-			'template',
+			'page_template',
+			'user_template',
 		]
 
 	def __init__(self, *args, **kwargs):

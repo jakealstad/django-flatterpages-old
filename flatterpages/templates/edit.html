@@ -2,15 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-     <style>
-      #id_head_content, #id_main_content, #id_css, #id_footer_content {
-        display: none;
-      }
-      #editor_id_head_content, #editor_id_main_content, #editor_id_css, #editor_id_footer_content {
-        height: 200px;
-        width: 1000px;
-      }
-    </style>
+     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
   </head>
 
   <body>
@@ -19,6 +11,16 @@
           <form action="" method="POST" encytype="multipart/form-data">
             {% csrf_token %}
             <div class="error" style="display:none;"></div>
+
+            <label for="id_page_template">Page Template</label>
+            {{ form.page_template.errors }}
+            {{ form.page_template }}
+            <br/>
+
+            <label for="id_user_template">User Template</label>
+            {{ form.user_template.errors }}
+            {{ form.user_template }}
+            <br/>
 
             <label for="id_title">Page Title</label>
             {{ form.title.errors }}
@@ -72,11 +74,6 @@
             <label for="id_head_content">Comments</label>
             {{ form.comments.errors }}
             {{ form.comments }}
-            <br/>
-
-            <label for="id_head_content">Page Template</label>
-            {{ form.template.errors }}
-            {{ form.template }}
             <br/>
 
             <button type="submit">Save</button>

@@ -1,11 +1,19 @@
 from django.db import models
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 
 
 class PageTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
 	template_content = models.TextField()
+
+
+class UserTemplate(models.Model):
+
+	title = models.CharField(max_length=100)
+	template_content = models.TextField()
+	user = models.ForeignKey(User)
 
 
 class Page(models.Model):
@@ -20,7 +28,8 @@ class Page(models.Model):
 	footer_content = models.TextField()
 	sites = models.ManyToManyField(Site)
 	comments = models.BooleanField()
-	template = models.ForeignKey(PageTemplate)
+	page_template = models.ForeignKey(PageTemplate)
+	user_template = models.ForeignKey(UserTemplate)
 	
 
 class PageMedia(models.Model):

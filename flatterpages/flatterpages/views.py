@@ -14,7 +14,7 @@ def create_page(request):
 	else:
 		form = PageForm()
 
-	return render(request, 'flatterpages_edit.html', {
+	return render(request, 'edit.html', {
 		'form': form,
 		})
 
@@ -25,7 +25,7 @@ def edit_page(request, slug):
 	if form.is_valid():
 		form.save()
 	
-	return render(request, 'flatterpages_edit.html', {
+	return render(request, 'edit.html', {
 		'form': form,
 		})
 
@@ -37,3 +37,7 @@ def render_page(request, slug):
 		'page': page,
 		})
 
+
+def manage_pages(request):
+
+	return render(request, 'manage.html')

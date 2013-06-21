@@ -11,7 +11,7 @@ class PageTemplate(models.Model):
 class Page(models.Model):
 
 	title = models.CharField(max_length=100)
-	slug = models.SlugField()
+	slug = models.SlugField(unique=True)
 	meta_description = models.TextField(max_length=155)
 	main_image = models.URLField()
 	head_content = models.TextField()

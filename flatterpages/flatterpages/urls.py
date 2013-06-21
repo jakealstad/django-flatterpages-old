@@ -22,5 +22,6 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
 	url(r'^flatterpages/create/$', 'flatterpages.views.create_page'),
 	url(r'^flatterpages/edit/(?P<slug>.*)$', 'flatterpages.views.edit_page'),
+    url(r'^flatterpages/create-template/$', 'flatterpages.views.create_template'),
 	url(r'^(?P<slug>.*)$', 'flatterpages.views.render_page'),
 )

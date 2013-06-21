@@ -9,24 +9,23 @@ class PageForm(forms.ModelForm):
 
 	class Meta:
 		model = Page
-		fields = [
-			'title',
-			'slug',
-			'meta_description',
-			'main_image',
-			'head_content',
-			'main_content',
-			'css',
-			'footer_content',
-			'sites',
-			'comments',
-			'page_template',
-			'user_template',
-		]
 
 	def __init__(self, *args, **kwargs):
 		super(PageForm, self).__init__(*args, **kwargs)
 
 	def save(self, commit=True):
 		instance = super(PageForm, self).save(commit=commit)
+		return instance
+
+
+class PageTemplateForm(forms.ModelForm):
+
+	class Meta:
+		model = PageTemplate
+
+	def __init__(self, *args, **kwargs):
+		super(PageTemplateForm, self).__init__(*args, **kwargs)
+
+	def save(self, commit=True):
+		instance = super(PageTemplateForm, self).save(commit=commit)
 		return instance

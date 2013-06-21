@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.template import Context, Template
 
-from flatterpages.forms import PageForm
+from flatterpages.forms import PageForm, PageTemplateForm
 from flatterpages.models import Page, PageMedia, PageTemplate
 
 
@@ -40,4 +40,23 @@ def render_page(request, slug):
 
 def manage_pages(request):
 
-	return render(request, 'manage.html')
+	return render(request, 'manage-pages.html')
+
+
+def create_template(request):
+	if request.method == 'POST':
+		form = PageTemplateForm(request.POST)
+		if form.is_valid():
+			form.save()
+
+	else:
+		form = PageTemplateForm()
+
+	return render(request, 'create-template.html', {
+		'form': form,
+		})
+
+
+def manage_templates(request):
+
+	return render(request, 'manage-page-templates.html')

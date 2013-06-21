@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Create Template</title>
+
+    <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
+  </head>
+
+  <body>
+
+  	<h1>Create Page Template</h1>
+
+  	<form action="" method="POST" encytype="multipart/form-data">
+
+		{% csrf_token %}
+		<div class="error" style="display:none;"></div>
+		
+	    <label for="id_user">User</label><br/>
+	    {{ form.user.errors }}
+	    {{ form.user }}
+	    <br/>
+    
+	    <label for="id_title">Title</label><br/>
+	    {{ form.title.errors }}
+	    {{ form.title }}
+	    <br/>
+
+	    <label for="id_template_content">Template Content</label>
+	    {{ form.template_content.errors }}
+	    {{ form.template_content }}
+	    <div id="editor_id_template_content"></div>
+	    <br/>
+
+	    <button type="submit">Save</button>
+
+	</form>
+
+	<script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        var aceHeadContent = ace.edit("editor_id_template_content");
+        var djangoHeadContent = document.getElementById("id_template_content");
+        aceHeadContent.setTheme("ace/theme/monokai");
+        aceHeadContent.getSession().setMode("ace/mode/html");
+        aceHeadContent.getSession().setValue(djangoHeadContent.value);
+        aceHeadContent.getSession().on('change', function(){
+        	djangoHeadContent.value = aceHeadContent.getSession().getValue();
+        });
+    </script>
+    
+  </body>
+</html>

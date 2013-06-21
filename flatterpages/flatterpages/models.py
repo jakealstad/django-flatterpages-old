@@ -7,13 +7,10 @@ class PageTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
 	template_content = models.TextField()
+	user = models.ForeignKey(User, blank=True)
 
-
-class UserTemplate(models.Model):
-
-	title = models.CharField(max_length=100)
-	template_content = models.TextField()
-	user = models.ForeignKey(User)
+	def __unicode__(self):
+		return self.title
 
 
 class Page(models.Model):
@@ -28,8 +25,10 @@ class Page(models.Model):
 	footer_content = models.TextField()
 	sites = models.ManyToManyField(Site)
 	comments = models.BooleanField()
-	page_template = models.ForeignKey(PageTemplate)
-	user_template = models.ForeignKey(UserTemplate)
+	template = models.ForeignKey(PageTemplate)
+
+	def __unicode__(self):
+		return self.title
 	
 
 class PageMedia(models.Model):
@@ -39,3 +38,6 @@ class PageMedia(models.Model):
 	media_type = models.CharField(max_length=50)
 	url = models.URLField()
 	page = models.ForeignKey(Page)
+
+	def __unicode__(self):
+		return self.title

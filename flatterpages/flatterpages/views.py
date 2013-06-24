@@ -96,6 +96,11 @@ def edit_user_template(request, slug):
 		})
 
 
-def manage_templates(request):
+def manage_page_templates(request):
 
 	return render(request, 'manage-page-templates.html')
+
+
+def manage_user_templates(request):
+
+	return render(request, 'manage-user-templates.html')

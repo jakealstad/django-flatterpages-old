@@ -27,5 +27,7 @@ urlpatterns += patterns('',
     url(r'^flatterpages/create-user-template/$', 'flatterpages.views.create_user_template'),
     url(r'^flatterpages/edit-page-template/(?P<slug>.*)$', 'flatterpages.views.edit_page_template'),
     url(r'^flatterpages/edit-user-template/(?P<slug>.*)$', 'flatterpages.views.edit_user_template'),
+    url(r'^flatterpages/manage-page-templates$', 'flatterpages.views.manage_page_templates'),
+    url(r'^flatterpages/manage-user-templates$', 'flatterpages.views.manage_user_templates'),
 	url(r'^(?P<slug>.*)$', 'flatterpages.views.render_page'),
 )

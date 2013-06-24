@@ -74,8 +74,8 @@ def create_user_template(request):
 		})
 
 
-def edit_page_template(request, slug):
-	instance = get_object_or_404(PageTemplate, slug=slug)
+def edit_page_template(request, id):
+	instance = get_object_or_404(PageTemplate, id=id)
 	form = PageTemplateForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
@@ -85,8 +85,8 @@ def edit_page_template(request, slug):
 		})
 
 
-def edit_user_template(request, slug):
-	instance = get_object_or_404(UserTemplate, slug=slug)
+def edit_user_template(request, id):
+	instance = get_object_or_404(UserTemplate, id=id)
 	form = UserTemplateForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
@@ -102,5 +102,8 @@ def manage_page_templates(request):
 
 
 def manage_user_templates(request):
+	templates = UserTemplate.objects.all()
 
-	return render(request, 'manage-user-templates.html')
+	return render(request, 'manage-user-templates.html', {
+		'templates': templates,
+		})

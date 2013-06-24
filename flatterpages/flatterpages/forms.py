@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User, Group
 
-from flatterpages.models import Page, PageMedia, PageTemplate
+from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
 
 
 class PageForm(forms.ModelForm):
@@ -28,4 +28,17 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
+		return instance
+
+
+class UserTemplateForm(forms.ModelForm):
+
+	class Meta:
+		model = UserTemplate
+
+	def __init__(self, *args, **kwargs):
+		super(UserTemplateForm, self).__init__(*args, **kwargs)
+
+	def save(self, commit=True):
+		instance = super(UserTemplateForm, self).save(commit=commit)
 		return instance

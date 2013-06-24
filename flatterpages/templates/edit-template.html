@@ -15,11 +15,13 @@
 
 		{% csrf_token %}
 		<div class="error" style="display:none;"></div>
-		
+
+		{% if form.user %}
 	    <label for="id_user">User</label><br/>
 	    {{ form.user.errors }}
 	    {{ form.user }}
 	    <br/>
+	    {% endif %}
     
 	    <label for="id_title">Title</label><br/>
 	    {{ form.title.errors }}

@@ -20,8 +20,12 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-	url(r'^flatterpages/create/$', 'flatterpages.views.create_page'),
-	url(r'^flatterpages/edit/(?P<slug>.*)$', 'flatterpages.views.edit_page'),
-    url(r'^flatterpages/create-template/$', 'flatterpages.views.create_template'),
+	url(r'^flatterpages/create-page/$', 'flatterpages.views.create_page'),
+    url(r'^flatterpages/edit-page/(?P<slug>.*)$', 'flatterpages.views.edit_page'),
+	url(r'^flatterpages/manage-pages/$', 'flatterpages.views.manage_pages'),
+    url(r'^flatterpages/create-page-template/$', 'flatterpages.views.create_page_template'),
+    url(r'^flatterpages/create-user-template/$', 'flatterpages.views.create_user_template'),
+    url(r'^flatterpages/edit-page-template/(?P<slug>.*)$', 'flatterpages.views.edit_page_template'),
+    url(r'^flatterpages/edit-user-template/(?P<slug>.*)$', 'flatterpages.views.edit_user_template'),
 	url(r'^(?P<slug>.*)$', 'flatterpages.views.render_page'),
 )

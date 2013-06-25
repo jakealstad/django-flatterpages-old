@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from django.template import Context, Template
 
@@ -5,6 +6,7 @@ from flatterpages.forms import PageForm, PageTemplateForm, UserTemplateForm
 from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
 
 
+@login_required
 def create_page(request):
 	if request.method == 'POST':
 		form = PageForm(request.POST)
@@ -19,6 +21,7 @@ def create_page(request):
 		})
 
 
+@login_required
 def edit_page(request, slug):
 	instance = get_object_or_404(Page, slug=slug)
 	form = PageForm(request.POST or None, instance=instance)
@@ -38,6 +41,7 @@ def render_page(request, slug):
 		})
 
 
+@login_required
 def manage_pages(request):
 	pages = Page.objects.all()
 
@@ -46,6 +50,7 @@ def manage_pages(request):
 		})
 
 
+@login_required
 def create_page_template(request):
 	if request.method == 'POST':
 		form = PageTemplateForm(request.POST)
@@ -60,6 +65,7 @@ def create_page_template(request):
 		})
 
 
+@login_required
 def create_user_template(request):
 	if request.method == 'POST':
 		form = UserTemplateForm(request.POST)
@@ -74,6 +80,7 @@ def create_user_template(request):
 		})
 
 
+@login_required
 def edit_page_template(request, id):
 	instance = get_object_or_404(PageTemplate, id=id)
 	form = PageTemplateForm(request.POST or None, instance=instance)
@@ -85,6 +92,7 @@ def edit_page_template(request, id):
 		})
 
 
+@login_required
 def edit_user_template(request, id):
 	instance = get_object_or_404(UserTemplate, id=id)
 	form = UserTemplateForm(request.POST or None, instance=instance)
@@ -96,11 +104,13 @@ def edit_user_template(request, id):
 		})
 
 
+@login_required
 def manage_page_templates(request):
 
 	return render(request, 'manage-page-templates.html')
 
 
+@login_required
 def manage_user_templates(request):
 	templates = UserTemplate.objects.all()
 

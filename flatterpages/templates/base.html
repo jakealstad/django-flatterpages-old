@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta description="{{ page.meta_description }}" />
     {{ page.head_content|render }}
     <style>
       {{ page.css|render }}
@@ -11,7 +12,7 @@
 
   <body>
 
-    {{ page.main_content|render }}
-    
+    {% include page.template %}
+
   </body>
 </html>

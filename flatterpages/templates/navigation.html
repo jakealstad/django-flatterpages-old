@@ -3,4 +3,9 @@
 <span>|</span>
 <a href="{% url flatterpages.views.create_user_template %}">Create New Template</a>
 <a href="{% url flatterpages.views.manage_user_templates %}">Manage Templates</a>
+{% if user.is_superuser %}
+<span>|</span>
+<a href="{% url flatterpages.views.create_page_template %}">Create New Page Template</a>
+<a href="{% url flatterpages.views.manage_page_templates %}">Manage Page Templates</a>
+{% endif %}
 <hr/>

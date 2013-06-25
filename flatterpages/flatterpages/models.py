@@ -39,6 +39,9 @@ class Page(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+	def template(self):
+		return 'pagetemplates/' + str(self.page_template).lower() + '.html'
 	
 
 class PageMedia(models.Model):

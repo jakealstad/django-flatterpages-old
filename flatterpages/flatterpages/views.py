@@ -35,6 +35,7 @@ def edit_page(request, slug):
 
 def render_page(request, slug):
 	page = get_object_or_404(Page, slug=slug)
+	# template = 'pagetemplates/' + str(page.page_template).lower() + '.html'
 
 	return render(request, 'base.html', {
 		'page': page,
@@ -106,8 +107,11 @@ def edit_user_template(request, id):
 
 @login_required
 def manage_page_templates(request):
+	templates = PageTemplate.objects.all()
 
-	return render(request, 'manage-page-templates.html')
+	return render(request, 'manage-page-templates.html', {
+		'templates': templates,
+		})
 
 
 @login_required

@@ -10,7 +10,10 @@
   	{% include 'navigation.html' %}
 
   	<h2>Manage Page Templates</h2>
-	
+    {% for template in templates %}
+    <a href="{% url flatterpages.views.edit_page_template template.id %}">{{ template }}</a>
+    <br/>
+    {% endfor %}
 
   </body>
 </html>

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class PageTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
-	template_content = models.TextField()
+	main_content = models.TextField()
 
 	def __unicode__(self):
 		return self.title
@@ -15,7 +15,8 @@ class PageTemplate(models.Model):
 class UserTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
-	template_content = models.TextField()
+	css = models.TextField()
+	main_content = models.TextField()
 	user = models.ForeignKey(User)
 
 	def __unicode__(self):

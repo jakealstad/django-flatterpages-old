@@ -3,6 +3,8 @@
 }
 
 #editor_id_head_content, #editor_id_main_content, #editor_id_css, #editor_id_footer_content, #editor_id_template_content {
-	height: 200px;
-	width: 1000px;
+	height: 400px;
+	width: 900px;
+	resize: both;
 }
+

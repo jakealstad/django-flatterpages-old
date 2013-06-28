@@ -28,9 +28,8 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
-		# f = open('flatterpages/templates/pagetemplates/' + str(self.title))
 		f = open('templates/pagetemplates/' + str(instance.title).lower() + '.html', 'w')
-		f.write(instance.template_content)
+		f.write(instance.main_content)
 		f.close()
 
 		return instance

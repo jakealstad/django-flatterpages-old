@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create Template</title>
+    <title>Create {% if form.user %}User{% else %}Page{% endif %} Template</title>
 
     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
   </head>
@@ -11,7 +11,7 @@
 
   	{% include 'navigation.html' %}
 
-  	<h1>Create Page Template</h1>
+  	<h1>Create {% if form.user %}User{% else %}Page{% endif %} Template</h1>
 
   	<form action="" method="POST" encytype="multipart/form-data">
 
@@ -30,11 +30,19 @@
 	    {{ form.title }}
 	    <br/>
 
-	    <label for="id_template_content">Template Content</label>
-	    {{ form.template_content.errors }}
-	    {{ form.template_content }}
-	    <div id="editor_id_template_content"></div>
+	    <label for="id_main_content">Template Content</label>
+	    {{ form.main_content.errors }}
+	    {{ form.main_content }}
+	    <div id="editor_id_main_content"></div>
 	    <br/>
+
+	    {% if form.user %}
+	    <label for="id_css">CSS</label>
+	    {{ form.css.errors }}
+	    {{ form.css }}
+	    <div id="editor_id_css"></div>
+	    <br/>
+	    {% endif %}
 
 	    <button type="submit">Save</button>
 
@@ -43,15 +51,28 @@
 	<script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
-        var aceHeadContent = ace.edit("editor_id_template_content");
-        var djangoHeadContent = document.getElementById("id_template_content");
-        aceHeadContent.setTheme("ace/theme/monokai");
-        aceHeadContent.getSession().setMode("ace/mode/html");
-        aceHeadContent.getSession().setValue(djangoHeadContent.value);
-        aceHeadContent.getSession().on('change', function(){
-        	djangoHeadContent.value = aceHeadContent.getSession().getValue();
+        var aceMainContent = ace.edit("editor_id_main_content");
+        var djangoMainContent = document.getElementById("id_main_content");
+        aceMainContent.setTheme("ace/theme/monokai");
+        aceMainContent.getSession().setMode("ace/mode/html");
+        aceMainContent.getSession().setValue(djangoMainContent.value);
+        aceMainContent.getSession().on('change', function(){
+        	djangoMainContent.value = aceMainContent.getSession().getValue();
         });
     </script>
+
+    {% if form.user %}
+    <script type="text/javascript">
+        var aceCSS = ace.edit("editor_id_css");
+        var djangoCSS = document.getElementById("id_css");
+        aceCSS.setTheme("ace/theme/monokai");
+        aceCSS.getSession().setMode("ace/mode/css");
+        aceCSS.getSession().setValue(djangoCSS.value);
+        aceCSS.getSession().on('change', function(){
+        	djangoCSS.value = aceCSS.getSession().getValue();
+        });
+    </script>
+    {% endif %}
     
   </body>
 </html>

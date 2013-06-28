@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Create New Page</title>
+
      <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
   </head>
 
@@ -101,6 +103,7 @@
             var djangoMainContent = document.getElementById("id_main_content");
             aceMainContent.setTheme("ace/theme/monokai");
             aceMainContent.getSession().setMode("ace/mode/html");
+            aceMainContent.getSession().setUseWrapMode(true);
             aceMainContent.getSession().setValue(djangoMainContent.value);
             aceMainContent.getSession().on('change', function(){
                 djangoMainContent.value = aceMainContent.getSession().getValue();

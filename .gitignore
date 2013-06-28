@@ -16,3 +16,6 @@ build
 
 # Logs:
 *.log
+
+pagetemplates/*
+usertemplate/*

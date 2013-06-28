@@ -13,7 +13,7 @@
 
   	<h2>Manage Pages</h2>
 	{% for page in pages %}
-	<a href="{% url flatterpages.views.render_page  page.slug %}">{{ page }}</a> - <a href="{% url flatterpages.views.edit_page page.slug %}">edit</a>
+	<a href="{% url flatterpages.views.render_page  page.slug %}">{{ page }}</a> - <a href="{% url flatterpages.views.edit_page page.slug %}">edit</a> - <a href="{% url flatterpages.views.delete_page page.slug %}">delete</a>
 	<br/>
 	{% endfor %}
 

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
 
 from flatterpages.forms import PageForm, PageTemplateForm, UserTemplateForm
@@ -49,6 +49,14 @@ def manage_pages(request):
 	return render(request, 'manage-pages.html', {
 		'pages': pages,
 		})
+
+
+@login_required
+def delete_page(request, slug):
+	page = get_object_or_404(Page, slug=slug)
+	page.delete()
+
+	return redirect(manage_pages)
 
 
 @login_required
@@ -121,3 +129,19 @@ def manage_user_templates(request):
 	return render(request, 'manage-user-templates.html', {
 		'templates': templates,
 		})
+
+
+@login_required
+def delete_page_template(request, id):
+	instance = get_object_or_404(PageTemplate, id=id)
+	instance.delete()
+
+	return redirect(manage_page_templates)
+
+
+@login_required
+def delete_user_template(request, id):
+	instance = get_object_or_404(UserTemplate, id=id)
+	instance.delete()
+
+	return redirect(manage_user_templates)

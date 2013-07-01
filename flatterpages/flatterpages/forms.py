@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User, Group
 
 from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
+from flatterpages.utils import write_to_file
 
 
 class PageForm(forms.ModelForm):
@@ -17,6 +18,8 @@ class PageForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageForm, self).save(commit=commit)
+		write_to_file(instance, 'css')
+
 		return instance
 
 
@@ -30,11 +33,7 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
-		if not path.isdir('templates/pagetemplates/'):
-			mkdir('templates/pagetemplates/')
-		f = open('templates/pagetemplates/' + str(instance.title).lower() + '.html', 'w')
-		f.write(instance.main_content)
-		f.close()
+		write_to_file(instance, 'html')
 
 		return instance
 

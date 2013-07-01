@@ -83,6 +83,10 @@
 
           </form>
 
+          {% for template in user_templates %}
+          <div class="user-template" style="display: none;">{{ template.main_content|safe }}</div>
+          {% endfor %}
+
         </div>
 
         <script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
@@ -138,6 +142,13 @@
             document.getElementById("id_title").onkeyup = function() {
                 var e = document.getElementById("id_slug");
                 if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
+            }
+        </script>
+
+        <script type="text/javascript">
+            var userTemplateSelector = document.getElementById("id_user_template");
+            userTemplateSelector.onclick = function () {
+                console.log(userTemplateSelector.value);
             }
         </script>
 

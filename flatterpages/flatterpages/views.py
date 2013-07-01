@@ -16,8 +16,11 @@ def create_page(request):
 	else:
 		form = PageForm()
 
+	user_templates = UserTemplate.objects.filter(user=request.user)
+
 	return render(request, 'edit-page.html', {
 		'form': form,
+		'user_templates': user_templates,
 		})
 
 
@@ -28,8 +31,11 @@ def edit_page(request, slug):
 	if form.is_valid():
 		form.save()
 	
+	user_templates = UserTemplate.objects.filter(user=request.user)
+
 	return render(request, 'edit-page.html', {
 		'form': form,
+		'user_templates': user_templates,
 		})
 
 

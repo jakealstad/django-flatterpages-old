@@ -1,3 +1,5 @@
+from os import path, mkdir
+
 from django import forms
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User, Group
@@ -28,6 +30,8 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
+		if not path.isdir('templates/pagetemplates/'):
+			mkdir('templates/pagetemplates/')
 		f = open('templates/pagetemplates/' + str(instance.title).lower() + '.html', 'w')
 		f.write(instance.main_content)
 		f.close()

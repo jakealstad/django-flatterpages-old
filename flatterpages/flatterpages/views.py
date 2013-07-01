@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
@@ -12,7 +14,6 @@ def create_page(request):
 		form = PageForm(request.POST)
 		if form.is_valid():
 			form.save()
-
 	else:
 		form = PageForm()
 

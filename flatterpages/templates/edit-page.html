@@ -84,7 +84,8 @@
           </form>
 
           {% for template in user_templates %}
-          <div class="user-template" style="display: none;">{{ template.main_content|safe }}</div>
+          <div id="user-main_content-{{ template.id }}" style="display: none;">{{ template.main_content|safe }}</div>
+          <div id="user-css-{{ template.id }}" style="display: none;">{{ template.css|safe }}</div>
           {% endfor %}
 
         </div>
@@ -94,6 +95,7 @@
         <script type="text/javascript">
             var aceHeadContent = ace.edit("editor_id_head_content");
             var djangoHeadContent = document.getElementById("id_head_content");
+
             aceHeadContent.setTheme("ace/theme/monokai");
             aceHeadContent.getSession().setMode("ace/mode/html");
             aceHeadContent.getSession().setValue(djangoHeadContent.value);
@@ -105,6 +107,7 @@
         <script type="text/javascript">
             var aceMainContent = ace.edit("editor_id_main_content");
             var djangoMainContent = document.getElementById("id_main_content");
+
             aceMainContent.setTheme("ace/theme/monokai");
             aceMainContent.getSession().setMode("ace/mode/html");
             aceMainContent.getSession().setUseWrapMode(true);
@@ -117,6 +120,7 @@
         <script type="text/javascript">
             var aceCSS = ace.edit("editor_id_css");
             var djangoCSS = document.getElementById("id_css");
+
             aceCSS.setTheme("ace/theme/monokai");
             aceCSS.getSession().setMode("ace/mode/css");
             aceCSS.getSession().setValue(djangoCSS.value);
@@ -128,6 +132,7 @@
         <script type="text/javascript">
             var aceFooterContent = ace.edit("editor_id_footer_content");
             var djangoFooterContent = document.getElementById("id_footer_content");
+
             aceFooterContent.setTheme("ace/theme/monokai");
             aceFooterContent.getSession().setMode("ace/mode/html");
             aceFooterContent.getSession().setValue(djangoFooterContent.value);
@@ -147,8 +152,12 @@
 
         <script type="text/javascript">
             var userTemplateSelector = document.getElementById("id_user_template");
+            var aceMainContent = ace.edit("editor_id_main_content");
+            var aceCSS = ace.edit("editor_id_css");
+
             userTemplateSelector.onclick = function () {
-                console.log(userTemplateSelector.value);
+                aceMainContent.getSession().setValue(document.getElementById('user-main_content-' + userTemplateSelector.value).innerHTML);
+                aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
             }
         </script>
 

@@ -39,7 +39,7 @@ class Page(models.Model):
 	main_image = models.URLField()
 	head_content = models.TextField()
 	main_content = models.TextField()
-	css = models.TextField()
+	css = models.TextField(blank=True, null=True)
 	footer_content = models.TextField()
 	sites = models.ManyToManyField(Site)
 	comments = models.BooleanField()

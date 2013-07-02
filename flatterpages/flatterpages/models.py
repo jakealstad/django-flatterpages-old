@@ -25,8 +25,14 @@ class UserTemplate(models.Model):
 		return self.title
 
 
+class Stylesheet(models.Model):
+	title = models.CharField(max_length=100)
+	css = models.TextField()
+
+
 class Page(models.Model):
 
+	parent_page = models.ForeignKey('self', blank=True, null=True)
 	title = models.CharField(max_length=100)
 	slug = models.SlugField(unique=True)
 	meta_description = models.TextField(max_length=155)
@@ -39,6 +45,7 @@ class Page(models.Model):
 	comments = models.BooleanField()
 	page_template = models.ForeignKey(PageTemplate)
 	user_template = models.ForeignKey(UserTemplate, blank=True, null=True)
+	stylesheet = models.ForeignKey(Stylesheet)
 
 	def __unicode__(self):
 		return self.title

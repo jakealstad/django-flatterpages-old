@@ -25,6 +25,11 @@
             {{ form.user_template }}
             <br/>
 
+            <label for="id_parent_page">Parent Page</label>
+            {{ form.parent_page.errors }}
+            {{ form.parent_page }}
+            <br/>
+
             <label for="id_title">Page Title</label>
             {{ form.title.errors }}
             {{ form.title }}
@@ -99,6 +104,7 @@
 
             aceHeadContent.setTheme("ace/theme/monokai");
             aceHeadContent.getSession().setMode("ace/mode/html");
+            aceHeadContent.getSession().setUseWrapMode(true);
             aceHeadContent.getSession().setValue(djangoHeadContent.value);
             aceHeadContent.getSession().on('change', function(){
                 djangoHeadContent.value = aceHeadContent.getSession().getValue();
@@ -124,6 +130,7 @@
 
             aceCSS.setTheme("ace/theme/monokai");
             aceCSS.getSession().setMode("ace/mode/css");
+            aceCSS.getSession().setUseWrapMode(true);
             aceCSS.getSession().setValue(djangoCSS.value);
             aceCSS.getSession().on('change', function(){
                 djangoCSS.value = aceCSS.getSession().getValue();
@@ -136,6 +143,7 @@
 
             aceFooterContent.setTheme("ace/theme/monokai");
             aceFooterContent.getSession().setMode("ace/mode/html");
+            aceFooterContent.getSession().setUseWrapMode(true);
             aceFooterContent.getSession().setValue(djangoFooterContent.value);
             aceFooterContent.getSession().on('change', function(){
                 djangoFooterContent.value = aceFooterContent.getSession().getValue();

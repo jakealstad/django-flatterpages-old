@@ -29,6 +29,9 @@ class Stylesheet(models.Model):
 	title = models.CharField(max_length=100)
 	css = models.TextField()
 
+	def __unicode__(self):
+		return self.title
+
 
 class Page(models.Model):
 
@@ -45,7 +48,7 @@ class Page(models.Model):
 	comments = models.BooleanField()
 	page_template = models.ForeignKey(PageTemplate)
 	user_template = models.ForeignKey(UserTemplate, blank=True, null=True)
-	stylesheet = models.ForeignKey(Stylesheet)
+	stylesheet = models.ForeignKey(Stylesheet, blank=True, null=True)
 
 	def __unicode__(self):
 		return self.title

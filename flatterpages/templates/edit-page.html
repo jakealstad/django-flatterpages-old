@@ -30,6 +30,11 @@
             {{ form.parent_page }}
             <br/>
 
+            <label for="id_stylesheet">Page Stylesheet</label>
+            {{ form.stylesheet.errors }}
+            {{ form.stylesheet }}
+            <br/>
+
             <label for="id_title">Page Title</label>
             {{ form.title.errors }}
             {{ form.title }}

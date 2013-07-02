@@ -3,6 +3,9 @@
 <span>|</span>
 <a href="{% url flatterpages.views.create_user_template %}">Create New User Template</a>
 <a href="{% url flatterpages.views.manage_user_templates %}">Manage User Templates</a>
+<span>|</span>
+<a href="{% url flatterpages.views.create_stylesheet %}">Create Stylesheet</a>
+<a href="{% url flatterpages.views.manage_stylesheets %}">Manage Stylesheets</a>
 {% if user.is_superuser %}
 <span>|</span>
 <a href="{% url flatterpages.views.create_page_template %}">Create New Page Template</a>

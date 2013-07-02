@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Manage Stylesheets</title>
+
+     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
+  </head>
+
+  <body>
+
+  	{% include 'navigation.html' %}
+
+  	<h2>Manage Stylesheets</h2>
+  	{% for stylesheet in stylesheets %}
+  	<a href="{% url flatterpages.views.edit_stylesheet stylesheet.id %}">{{ stylesheet }}</a> - <a href="{% url flatterpages.views.delete_stylesheet stylesheet.id %}">delete</a>
+  	<br/>
+  	{% endfor %}
+
+  </body>
+</html>

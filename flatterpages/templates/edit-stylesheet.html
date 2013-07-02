@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Create Stylesheet</title>
+
+    <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
+  </head>
+
+  <body>
+
+  	{% include 'navigation.html' %}
+
+  	<h1>Create Stylesheet</h1>
+
+  	<form action="" method="POST" encytype="multipart/form-data">
+
+		{% csrf_token %}
+		<div class="error" style="display:none;"></div>
+    
+	    <label for="id_title">Title</label><br/>
+	    {{ form.title.errors }}
+	    {{ form.title }}
+	    <br/>
+
+      <label for="id_css">CSS</label><br/>
+      {{ form.css.errors }}
+      {{ form.css }}
+      <div id="editor_id_css"></div>
+      <br/>
+
+	    <button type="submit">Save</button>
+
+	</form>
+
+	<script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        var aceCSS = ace.edit("editor_id_css");
+        var djangoCSS = document.getElementById("id_css");
+
+        aceCSS.setTheme("ace/theme/monokai");
+        aceCSS.getSession().setMode("ace/mode/css");
+        aceCSS.getSession().setUseWrapMode(true);
+        aceCSS.getSession().setValue(djangoCSS.value);
+        aceCSS.getSession().on('change', function(){
+            djangoCSS.value = aceCSS.getSession().getValue();
+        });
+    </script>
+    
+  </body>
+</html>

@@ -26,8 +26,8 @@ def create_page(request):
 
 
 @login_required
-def edit_page(request, id):
-	instance = get_object_or_404(Page, id=id)
+def edit_page(request, url):
+	instance = get_object_or_404(Page, url=url)
 	form = PageForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
@@ -61,8 +61,8 @@ def manage_pages(request):
 
 
 @login_required
-def delete_page(request, id):
-	page = get_object_or_404(Page, id=id)
+def delete_page(request, url):
+	page = get_object_or_404(Page, url=url)
 	page.delete()
 
 	return redirect(manage_pages)

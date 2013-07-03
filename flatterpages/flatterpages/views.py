@@ -26,8 +26,8 @@ def create_page(request):
 
 
 @login_required
-def edit_page(request, slug):
-	instance = get_object_or_404(Page, slug=slug)
+def edit_page(request, id):
+	instance = get_object_or_404(Page, id=id)
 	form = PageForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
@@ -40,9 +40,11 @@ def edit_page(request, slug):
 		})
 
 
-def render_page(request, slug):
-	page = get_object_or_404(Page, slug=slug)
-	# template = 'pagetemplates/' + str(page.page_template).lower() + '.html'
+def render_page(request, url):
+	page = get_object_or_404(Page, url=url)
+
+	if page.parent_page:
+		print str(page.parent_page) + '>' + str(page)
 
 	return render(request, 'base.html', {
 		'page': page,
@@ -59,8 +61,8 @@ def manage_pages(request):
 
 
 @login_required
-def delete_page(request, slug):
-	page = get_object_or_404(Page, slug=slug)
+def delete_page(request, id):
+	page = get_object_or_404(Page, id=id)
 	page.delete()
 
 	return redirect(manage_pages)

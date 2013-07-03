@@ -11,7 +11,6 @@ class PageManager(admin.ModelAdmin):
 	inlines = [
 		PageMediaInline,
 	]
-	prepopulated_fields = {"slug": ("title",)}
 
 
 admin.site.register(Page, PageManager)

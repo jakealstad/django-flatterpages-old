@@ -37,7 +37,7 @@ class Page(models.Model):
 
 	parent_page = models.ForeignKey('self', blank=True, null=True)
 	title = models.CharField(max_length=100)
-	slug = models.SlugField(unique=True)
+	url = models.CharField(max_length=100)
 	meta_description = models.TextField(max_length=155)
 	main_image = models.URLField()
 	head_content = models.TextField()

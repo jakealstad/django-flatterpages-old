@@ -1,21 +1,33 @@
+{% extends "app-base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Manage Page Templates</title>
 
-     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
-  </head>
+{% block page_title %}
+	Page Templates - {{ block.super }}
+{% endblock page_title %}
 
-  <body>
+{% block content %}
+<h1>Page Templates</h1>
 
-  	{% include 'navigation.html' %}
+<a href="{% url flatterpages.views.create_page_template %}">Create Page Template</a>
 
-  	<h2>Manage Page Templates</h2>
-    {% for template in templates %}
-    <a href="{% url flatterpages.views.edit_page_template template.id %}">{{ template }}</a> - <a href="{% url flatterpages.views.delete_page_template template.id %}">delete</a>
-    <br/>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Date Created</th>
+			<th>Last Updated</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+    	{% for template in templates %}
+	    <tr>
+		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}">{{ template }}</a></td>
+		    <td></td>
+		    <td></td>
+		    <td><a href="{% url flatterpages.views.delete_page_template template.id %}">Delete</a></td>
+	    </tr>
     {% endfor %}
-
-  </body>
-</html>
+	</tbody>
+</table>
+{% endblock content %}

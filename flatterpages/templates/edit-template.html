@@ -1,53 +1,69 @@
+{% extends "app-base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Create {% if form.user %}User{% else %}Page{% endif %} Template</title>
 
-    <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
-  </head>
+{% block page_title %}
+	Page List - {{ block.super }}
+{% endblock page_title %}
 
-  <body>
+{% block content %}
 
-  	{% include 'navigation.html' %}
+<h1>Create {% if form.user %}User{% else %}Page{% endif %} Template</h1>
 
-  	<h1>Create {% if form.user %}User{% else %}Page{% endif %} Template</h1>
+<form class="form" action="" method="POST" encytype="multipart/form-data">
+  	<div class="col-1">
+    {% csrf_token %}
+    <div class="error" style="display:none;"></div>
+    <fieldset>
+    	<legend class="visuallyhidden">Markup &amp; CSS</legend>
+    	<div class="editor input-container">
+    		<div class="label-error-container">
+    		    <label for="id_main_content">Markup</label>
+    		</div>
+    		{{ form.main_content.errors }}
+    		{{ form.main_content }}
+    		<div id="editor_id_main_content"></div>
+    	</div>
 
-  	<form action="" method="POST" encytype="multipart/form-data">
+        {% if form.user %}
+        <div class="editor input-container">
+    		<div class="label-error-container">
+    		    <label for="id_css">CSS</label>
+    		</div>
+    		{{ form.css.errors }}
+    		{{ form.css }}
+    		<div id="editor_id_css"></div>
+        </div>
+        {% endif %}
+    </fieldset>
+  	</div>
+  	<div class="col-2">
 
-		{% csrf_token %}
-		<div class="error" style="display:none;"></div>
+  		{% if form.user %}
+       	<fieldset>
+  			<div class="input-container">
+    		    <label for="id_user">User</label><br/>
+    		    {{ form.user.errors }}
+    		    {{ form.user }}
+  			</div>
+      	</fieldset>
+      	{% endif %}
+      	
+      	<fieldset>
+      		<div class="input-container">
+    		    <label for="id_title">Title</label><br/>
+    		    {{ form.title.errors }}
+    		    {{ form.title }}
+      		</div>
+      	</fieldset>
+      	
+      	<fieldset>
+    	  	<button type="submit">Save</button>
+      	</fieldset>
+  	</div>
+</form>
+{% endblock content %}
 
-		{% if form.user %}
-	    <label for="id_user">User</label><br/>
-	    {{ form.user.errors }}
-	    {{ form.user }}
-	    <br/>
-	    {% endif %}
-    
-	    <label for="id_title">Title</label><br/>
-	    {{ form.title.errors }}
-	    {{ form.title }}
-	    <br/>
-
-	    <label for="id_main_content">Template Content</label>
-	    {{ form.main_content.errors }}
-	    {{ form.main_content }}
-	    <div id="editor_id_main_content"></div>
-	    <br/>
-
-	    {% if form.user %}
-	    <label for="id_css">CSS</label>
-	    {{ form.css.errors }}
-	    {{ form.css }}
-	    <div id="editor_id_css"></div>
-	    <br/>
-	    {% endif %}
-
-	    <button type="submit">Save</button>
-
-	</form>
-
+{% block footer %}
 	<script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript">
@@ -73,6 +89,5 @@
         });
     </script>
     {% endif %}
-    
-  </body>
-</html>
+
+{% endblock footer %}

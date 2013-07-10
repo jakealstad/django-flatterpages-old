@@ -14,7 +14,7 @@
 	<thead>
 		<tr>
 			<th>Title</th>
-			<th>Live Page</th>
+			<th>URL</th>
 			<th>Last Updated</th>
 			<th>Actions</th>
 		</tr>
@@ -24,7 +24,7 @@
 		<tr>
 			<td><a href="{% url flatterpages.views.edit_page page.slug %}">{{ page.title }}</a></td>
 			<td><a href="{% url flatterpages.views.render_page  page.slug %}" title="">{{ page.slug }}</a></td>
-			<td></td>
+			<td>Date in da past goes here</td>
 			<td><a href="{% url flatterpages.views.delete_page page.slug %}" title="">Delete</a></td>
 		</tr>
 		{% endfor %}

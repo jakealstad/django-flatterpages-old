@@ -74,13 +74,15 @@ body,
 
 a:link,
 a:visited {
-	color: #66B5FF;
+	/*color: #66B5FF;*/
+	color: #fff;
 	text-decoration: none;
 }
 
 a:hover,
 a:focus {
-	color: #63B2FC;
+	/*color: #63B2FC;*/
+	color: #66B5FF;
 }
 
 /* ==============
@@ -114,10 +116,9 @@ nav ul li {
 	-webkit-flex: 1;
 }
 
-nav a {
+nav a:link,
+nav a:visited {
     display: block;
-    padding: 15px 0;
-
     text-align: center;
     text-decoration: none;
     font-weight: 400;
@@ -126,10 +127,8 @@ nav a {
 }
 
 nav a:hover,
-nav a:visited {
-	background: #444;
-
-    color: white;
+nav a:focus {
+    color: #bbb;
     text-decoration: none;
 }
 
@@ -188,7 +187,7 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
     -moz-box-shadow: 0px 0px 3px #0C0C0C;
 	-webkit-box-shadow: 0px 0px 3px #0C0C0C;
 	box-shadow: 0px 0px 3px #0C0C0C;
-	padding: 0;
+	padding: 15px 0;
 }
 
 .title {
@@ -221,6 +220,15 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
 
 .col-2 {
 	-webkit-flex: 2;
+}
+
+h1 + a {
+	display: inline-block;
+	margin-bottom: 25px;
+}
+
+.input-container {
+	margin-bottom: 15px;
 }
 
 .input-container.editor,
@@ -271,7 +279,7 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
 .errorlist {
 	list-style: none;
 	font-size: 87.5%;
-	color: #F66;
+	color: #FF4141;
 	font-weight: 300;
 	margin: 0;
 	padding: 0;
@@ -289,6 +297,11 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
 	padding: 7%;
 }
 
+.col-2 fieldset.contains-error,
+.editor.contains-error {
+	border-top: 2px solid #FF4141;
+}
+
 input, textarea, select {
 	background: #383838;
 	border: 1px solid #1F1F1F;
@@ -301,7 +314,7 @@ select {
 
 input,
 textarea {
-	color: #CECECE;
+	color: #dadada;
 	font-weight: 300;
 	padding: 3%;
 }
@@ -317,7 +330,6 @@ textarea:focus {
 	color: #ADADAD;
 	font-size: 14px;
 	font-weight: 300;
-	line-height: 1em;
 	
 	vertical-align: top;
 }
@@ -326,7 +338,6 @@ textarea:focus {
 .col-2 textarea,
 .col-2 select {
 	font-size: 87.5%;
-	margin-bottom: 15px;
 }
 
 .col-2 textarea {
@@ -347,18 +358,46 @@ input[type="checkbox"],
 input[type="radio"] {
 	float: left;
 	margin-right: 5px;
-	margin-bottom: 0px;
+} 
+
+.input-note {
+	color: #ADADAD;
+	font-size: 68.75%;
+	font-weight: 300;
+	line-height: 1em;
+	
+	margin-top: 5px;
 }
 
-input[type="submit"],
-button[type="submit"] {
-	background: #1175D1;
+.btn {
+	background: #414141;
 	border: none;
 	padding: 3% 6%;
 	
+	color: #fff;
+	font-size: 87.5%;
 	font-weight: 300;
 }
 
+.col-2 .btn {
+	display: block;
+	width: 100%;
+	margin-bottom: 3px;
+}
+
+.col-2 .btn:last-child {
+	margin-bottom: 0;
+}
+
+.primary-action {
+	background: #1175D1;
+}
+
+a.destructive-action {
+	color: #FF4141;
+	font-size: 87.5%;
+	font-weight: 300;
+}
 
 /* ===============
     Ace Editors
@@ -404,11 +443,12 @@ th {
 }
 
 table tr:nth-child(2n) {
-	background: rgba(44, 44, 44, 0.41);
+	background: rgba(0, 0, 0, 0.11);
 }
 
 td {
 	padding: 4px 10px;
+	color: #ddd;
 }
 
 table,

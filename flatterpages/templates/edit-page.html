@@ -14,7 +14,7 @@
 		<fieldset>
 			<legend class="visuallyhidden">Page Content</legend>
 			
-			<div class="editor input-container">
+			<div class="editor input-container{% if form.head_content.errors %} contains-error{% endif %}">
 				<div class="label-error-container">
 				    <label for="id_head_content ">Head Content</label>
 				    {{ form.head_content.errors }}
@@ -23,7 +23,7 @@
 			    <div id="editor_id_head_content"></div>
 			</div>
 			
-			<div class="editor input-container">
+			<div class="editor input-container{% if form.main_content.errors %} contains-error{% endif %}">
 				<div class="label-error-container">
 				    <label for="id_main_content">Main Content</label>
 				    {{ form.main_content.errors }}
@@ -32,7 +32,7 @@
 			    <div id="editor_id_main_content"></div>
 			</div>
 
-			<div class="editor input-container">
+			<div class="editor input-container{% if form.css.errors %} contains-error{% endif %}">
 				<div class="label-error-container">
 				    <label for="id_css">CSS</label>
 				    {{ form.css.errors }}
@@ -41,7 +41,7 @@
 			    <div id="editor_id_css"></div>
 			</div>
 
-			<div class="editor input-container">
+			<div class="editor input-container{% if form.footer_content.errors %} contains-error{% endif %}">
 				<div class="label-error-container">
 				    <label for="id_footer_content">Footer Content</label>
 				    {{ form.footer_content.errors }}
@@ -54,8 +54,13 @@
 
     <div class="col-2">
 	    <fieldset>
+	    	<button class="primary-action btn" type="">Save & Continue Editing</button>
+	    	<button class="btn" type="submit">Save</button>
+	    </fieldset>
+	    
+	    <fieldset {% if form.page_template.errors or form.user_template.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Templates</legend>
 	    	<div class="input-container">
-		    	<legend>Templates</legend>
 			    <label for="id_page_template">Page Template</label>
 			    {{ form.page_template.errors }}
 			    {{ form.page_template }}
@@ -67,41 +72,59 @@
 			</div>
 	    </fieldset>
 	    
-	    <fieldset>
-	    	<legend></legend>
-		    <label for="id_title">Page Title</label>
-		    {{ form.title.errors }}
-		    {{ form.title }}
-		
-		    <label for="id_slug">URL</label>
-		    {{ form.slug.errors }}
-		    {{ form.slug }}
-		
-		    <label for="id_meta_description">Meta Description</label>
-		    {{ form.meta_description.errors }}
-		    {{ form.meta_description }}
+	    <fieldset {% if form.title.errors or form.slug.errors or form.meta_description.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Page Details</legend>
+	    	
+	    	<div class="input-container">
+			    <label for="id_title">Page Title</label>
+			    {{ form.title.errors }}
+			    {{ form.title }}
+	    	</div>
+	    	
+	    	<div class="input-container">
+			    <label for="id_slug">URL</label>
+			    {{ form.slug.errors }}
+			    {{ form.slug }}
+	    	</div>
+	    	<div class="input-container">
+			    <label for="id_meta_description">Meta Description</label>
+			    {{ form.meta_description.errors }}
+			    {{ form.meta_description }}
+			    <span class="input-note">Also used for Facebook open graph description</span>
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.main_image.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Social Network Image</legend>
+	    	<div class="input-container">
+			    <label for="id_main_image">Main Image</label>
+			    {{ form.main_image.errors }}
+			    {{ form.main_image }}
+			    <span class="input-note">Used for Facebook's open graph image</span>
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.sites.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Sites</legend>
+	    	<div class="input-container">
+		    	<label for="id_head_content">Sites</label>
+			    {{ form.sites.errors }}
+			    {{ form.sites }}
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.comments.errors %}class="contains-error"{% endif %}>
+		    <legend class="visuallyhidden">Commenting</legend>
+	    	<div class="input-container">
+		    	<label for="id_head_content">Comments</label>
+			    {{ form.comments.errors }}
+			    {{ form.comments }}
+	    	</div>
 	    </fieldset>
 	    
 	    <fieldset>
-		    <label for="id_main_image">Main Image</label>
-		    {{ form.main_image.errors }}
-		    {{ form.main_image }}
-	    </fieldset>
-	    
-	    <fieldset>
-	    	<legend></legend>
-	    	<label for="id_head_content">Sites</label>
-		    {{ form.sites.errors }}
-		    {{ form.sites }}
-	    </fieldset>
-	    <fieldset>
-	    	<legend></legend>
-	    	<label for="id_head_content">Comments</label>
-		    {{ form.comments.errors }}
-		    {{ form.comments }}
-	    </fieldset>
-	    <fieldset>
-	    	<button type="submit">Save</button>
+	    	<legend class="visuallyhidden">Permanently Delete Page</legend> 
+	    	<a class="destructive-action" href="" title="Delete Page &amp; Resources">Delete Page</a>
 	    </fieldset>
     </div>
 </form>

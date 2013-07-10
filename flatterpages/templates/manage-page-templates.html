@@ -22,10 +22,10 @@
 	<tbody>
     	{% for template in templates %}
 	    <tr>
-		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}">{{ template }}</a></td>
-		    <td></td>
-		    <td></td>
-		    <td><a href="{% url flatterpages.views.delete_page_template template.id %}">Delete</a></td>
+		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}" title="Edit: {{ template }}">{{ template }}</a></td>
+		    <td>Date Created</td>
+		    <td>Last Updated</td>
+		    <td><a href="{% url flatterpages.views.delete_page_template template.id %}" title="Delete: {{ template }}">Delete</a></td>
 	    </tr>
     {% endfor %}
 	</tbody>

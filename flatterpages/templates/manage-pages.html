@@ -22,10 +22,10 @@
 	<tbody>
 		{% for page in pages %}
 		<tr>
-			<td><a href="{% url flatterpages.views.edit_page page.slug %}">{{ page.title }}</a></td>
-			<td><a href="{% url flatterpages.views.render_page  page.slug %}" title="">{{ page.slug }}</a></td>
+			<td><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></td>
+			<td><a href="{% url flatterpages.views.render_page  page.url %}" title="">{{ page.url }}</a></td>
 			<td>Date in da past goes here</td>
-			<td><a href="{% url flatterpages.views.delete_page page.slug %}" title="">Delete</a></td>
+			<td><a href="{% url flatterpages.views.delete_page page.url %}" title="">Delete</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>

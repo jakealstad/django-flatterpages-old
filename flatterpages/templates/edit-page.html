@@ -124,7 +124,7 @@
 	    
 	    <fieldset>
 	    	<legend class="visuallyhidden">Permanently Delete Page</legend> 
-	    	<a class="destructive-action" href="" title="Delete Page &amp; Resources">Delete Page</a>
+	    	<a class="destructive-action" href="{% url flatterpages.views.delete_page page.url %}" title="Delete Page &amp; Resources">Delete Page</a>
 	    </fieldset>
     </div>
 </form>

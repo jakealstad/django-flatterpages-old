@@ -1,6 +1,7 @@
 {% extends "app-base.html" %}
 {% load staticfiles %}
 
+
 {% block page_title %}
 	Create New Page - {{ block.super }}
 {% endblock page_title %}
@@ -131,59 +132,80 @@
 {% endblock content %}
 
 {% block footer %}
-    <script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
+        <!-- start ace editor setup -->
+        <script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
 
-    <script type="text/javascript">
-        var aceHeadContent = ace.edit("editor_id_head_content");
-        var djangoHeadContent = document.getElementById("id_head_content");
-        aceHeadContent.setTheme("ace/theme/monokai");
-        aceHeadContent.getSession().setMode("ace/mode/html");
-        aceHeadContent.getSession().setValue(djangoHeadContent.value);
-        aceHeadContent.getSession().on('change', function(){
-            djangoHeadContent.value = aceHeadContent.getSession().getValue();
-        });
-    </script>
+        <script type="text/javascript">
+            var aceHeadContent = ace.edit("editor_id_head_content");
+            var djangoHeadContent = document.getElementById("id_head_content");
 
-    <script type="text/javascript">
-        var aceMainContent = ace.edit("editor_id_main_content");
-        var djangoMainContent = document.getElementById("id_main_content");
-        aceMainContent.setTheme("ace/theme/monokai");
-        aceMainContent.getSession().setMode("ace/mode/html");
-        aceMainContent.getSession().setUseWrapMode(true);
-        aceMainContent.getSession().setValue(djangoMainContent.value);
-        aceMainContent.getSession().on('change', function(){
-            djangoMainContent.value = aceMainContent.getSession().getValue();
-        });
-    </script>
+            aceHeadContent.setTheme("ace/theme/monokai");
+            aceHeadContent.getSession().setMode("ace/mode/html");
+            aceHeadContent.getSession().setUseWrapMode(true);
+            aceHeadContent.getSession().setValue(djangoHeadContent.value);
+            aceHeadContent.getSession().on('change', function(){
+                djangoHeadContent.value = aceHeadContent.getSession().getValue();
+            });
+        </script>
 
-    <script type="text/javascript">
-        var aceCSS = ace.edit("editor_id_css");
-        var djangoCSS = document.getElementById("id_css");
-        aceCSS.setTheme("ace/theme/monokai");
-        aceCSS.getSession().setMode("ace/mode/css");
-        aceCSS.getSession().setValue(djangoCSS.value);
-        aceCSS.getSession().on('change', function(){
-            djangoCSS.value = aceCSS.getSession().getValue();
-        });
-    </script>
+        <script type="text/javascript">
+            var aceMainContent = ace.edit("editor_id_main_content");
+            var djangoMainContent = document.getElementById("id_main_content");
 
-    <script type="text/javascript">
-        var aceFooterContent = ace.edit("editor_id_footer_content");
-        var djangoFooterContent = document.getElementById("id_footer_content");
-        aceFooterContent.setTheme("ace/theme/monokai");
-        aceFooterContent.getSession().setMode("ace/mode/html");
-        aceFooterContent.getSession().setValue(djangoFooterContent.value);
-        aceFooterContent.getSession().on('change', function(){
-            djangoFooterContent.value = aceFooterContent.getSession().getValue();
-        });
-    </script>
+            aceMainContent.setTheme("ace/theme/monokai");
+            aceMainContent.getSession().setMode("ace/mode/html");
+            aceMainContent.getSession().setUseWrapMode(true);
+            aceMainContent.getSession().setValue(djangoMainContent.value);
+            aceMainContent.getSession().on('change', function(){
+                djangoMainContent.value = aceMainContent.getSession().getValue();
+            });
+        </script>
 
-    <!-- auto populate url slug -->
-    <script src="{% static 'admin/js/urlify.js' %}" type="text/javascript"></script>
-    <script type="text/javascript">
-        document.getElementById("id_title").onkeyup = function() {
-            var e = document.getElementById("id_slug");
-            if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
-        }
-    </script>
+        <script type="text/javascript">
+            var aceCSS = ace.edit("editor_id_css");
+            var djangoCSS = document.getElementById("id_css");
+
+            aceCSS.setTheme("ace/theme/monokai");
+            aceCSS.getSession().setMode("ace/mode/css");
+            aceCSS.getSession().setUseWrapMode(true);
+            aceCSS.getSession().setValue(djangoCSS.value);
+            aceCSS.getSession().on('change', function(){
+                djangoCSS.value = aceCSS.getSession().getValue();
+            });
+        </script>
+
+        <script type="text/javascript">
+            var aceFooterContent = ace.edit("editor_id_footer_content");
+            var djangoFooterContent = document.getElementById("id_footer_content");
+
+            aceFooterContent.setTheme("ace/theme/monokai");
+            aceFooterContent.getSession().setMode("ace/mode/html");
+            aceFooterContent.getSession().setUseWrapMode(true);
+            aceFooterContent.getSession().setValue(djangoFooterContent.value);
+            aceFooterContent.getSession().on('change', function(){
+                djangoFooterContent.value = aceFooterContent.getSession().getValue();
+            });
+        </script>
+        <!-- end ace editor setup -->
+
+        <!-- auto populate url slug -->
+        <script src="{% static 'admin/js/urlify.js' %}" type="text/javascript"></script>
+        <script type="text/javascript">
+            document.getElementById("id_title").onkeyup = function() {
+                var e = document.getElementById("id_slug");
+                if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
+            }
+        </script>
+
+        <script type="text/javascript">
+            // auto-populate main content and css fields per user-templates
+            var userTemplateSelector = document.getElementById("id_user_template");
+            var aceMainContent = ace.edit("editor_id_main_content");
+            var aceCSS = ace.edit("editor_id_css");
+
+            userTemplateSelector.onclick = function () {
+                aceMainContent.getSession().setValue(document.getElementById('user-main_content-' + userTemplateSelector.value).innerHTML);
+                aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
+            }
+        </script>
 {% endblock footer %}

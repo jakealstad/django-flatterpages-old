@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
@@ -23,20 +25,30 @@ class UserTemplate(models.Model):
 		return self.title
 
 
+class Stylesheet(models.Model):
+	title = models.CharField(max_length=100)
+	css = models.TextField()
+
+	def __unicode__(self):
+		return self.title
+
+
 class Page(models.Model):
 
+	parent_page = models.ForeignKey('self', blank=True, null=True)
 	title = models.CharField(max_length=100)
 	slug = models.SlugField(unique=True)
 	meta_description = models.TextField(max_length=155)
 	main_image = models.URLField()
 	head_content = models.TextField()
 	main_content = models.TextField()
-	css = models.TextField()
+	css = models.TextField(blank=True, null=True)
 	footer_content = models.TextField()
 	sites = models.ManyToManyField(Site)
 	comments = models.BooleanField()
 	page_template = models.ForeignKey(PageTemplate)
 	user_template = models.ForeignKey(UserTemplate, blank=True, null=True)
+	stylesheet = models.ForeignKey(Stylesheet, blank=True, null=True)
 
 	def __unicode__(self):
 		return self.title

@@ -1,9 +1,11 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
 
-from flatterpages.forms import PageForm, PageTemplateForm, UserTemplateForm
-from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
+from flatterpages.forms import PageForm, PageTemplateForm, UserTemplateForm, StylesheetForm
+from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Stylesheet
 
 
 @login_required
@@ -12,12 +14,14 @@ def create_page(request):
 		form = PageForm(request.POST)
 		if form.is_valid():
 			form.save()
-
 	else:
 		form = PageForm()
 
+	user_templates = UserTemplate.objects.filter(user=request.user)
+
 	return render(request, 'edit-page.html', {
 		'form': form,
+		'user_templates': user_templates,
 		})
 
 
@@ -28,8 +32,11 @@ def edit_page(request, slug):
 	if form.is_valid():
 		form.save()
 	
+	user_templates = UserTemplate.objects.filter(user=request.user)
+
 	return render(request, 'edit-page.html', {
 		'form': form,
+		'user_templates': user_templates,
 		})
 
 
@@ -145,3 +152,46 @@ def delete_user_template(request, id):
 	instance.delete()
 
 	return redirect(manage_user_templates)
+
+
+@login_required
+def create_stylesheet(request):
+	if request.method == 'POST':
+		form = StylesheetForm(request.POST)
+		if form.is_valid():
+			form.save()
+	else:
+		form = StylesheetForm()
+
+	return render(request, 'edit-stylesheet.html', {
+		'form': form,
+		})
+
+
+@login_required
+def edit_stylesheet(request, id):
+	instance = get_object_or_404(Stylesheet, id=id)
+	form = StylesheetForm(request.POST or None, instance=instance)
+	if form.is_valid():
+		form.save()
+
+	return render(request, 'edit-stylesheet.html', {
+		'form': form,
+		})
+
+
+@login_required
+def manage_stylesheets(request):
+	stylesheets = Stylesheet.objects.all()
+
+	return render(request, 'manage-stylesheets.html', {
+		'stylesheets': stylesheets,
+		})
+
+
+@login_required
+def delete_stylesheet(request, id):
+	instance = get_object_or_404(Stylesheet, id=id)
+	instance.delete()
+
+	return redirect(manage_stylesheets)

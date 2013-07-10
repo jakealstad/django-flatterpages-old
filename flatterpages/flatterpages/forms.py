@@ -1,8 +1,11 @@
+from os import path, mkdir
+
 from django import forms
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User, Group
 
-from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
+from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Stylesheet
+from flatterpages.utils import write_to_file
 
 
 class PageForm(forms.ModelForm):
@@ -15,6 +18,8 @@ class PageForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageForm, self).save(commit=commit)
+		write_to_file(instance, 'css')
+
 		return instance
 
 
@@ -28,9 +33,7 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
-		f = open('templates/pagetemplates/' + str(instance.title).lower() + '.html', 'w')
-		f.write(instance.main_content)
-		f.close()
+		write_to_file(instance, 'html')
 
 		return instance
 
@@ -45,4 +48,17 @@ class UserTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(UserTemplateForm, self).save(commit=commit)
+		return instance
+
+
+class StylesheetForm(forms.ModelForm):
+
+	class Meta:
+		model = Stylesheet
+
+	def __init__(self, *args, **kwargs):
+		super(StylesheetForm, self).__init__(*args, **kwargs)
+
+	def save(self, commit=True):
+		instance = super(StylesheetForm, self).save(commit=commit)
 		return instance

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate
+from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Stylesheet
 
 
 class PageMediaInline(admin.TabularInline):
@@ -17,3 +17,4 @@ class PageManager(admin.ModelAdmin):
 admin.site.register(Page, PageManager)
 admin.site.register(PageTemplate)
 admin.site.register(UserTemplate)
+admin.site.register(Stylesheet)

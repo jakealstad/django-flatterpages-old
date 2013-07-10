@@ -1,105 +1,136 @@
+{% extends "app-base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Create New Page</title>
 
-     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
-  </head>
+{% block page_title %}
+	Create New Page - {{ block.super }}
+{% endblock page_title %}
 
-  <body>
-    {% include 'navigation.html' %}
-    <div class="container">
+{% block content %}
+<h1>Create New Flatpage</h1>
+<form class="form" action="" method="POST" encytype="multipart/form-data">
+    {% csrf_token %}
+    <div class="error" style="display:none;"></div>
+	<div class="col-1">
+		<fieldset>
+			<legend class="visuallyhidden">Page Content</legend>
+			
+			<div class="editor input-container{% if form.head_content.errors %} contains-error{% endif %}">
+				<div class="label-error-container">
+				    <label for="id_head_content ">Head Content</label>
+				    {{ form.head_content.errors }}
+				</div>
+			    {{ form.head_content }}
+			    <div id="editor_id_head_content"></div>
+			</div>
+			
+			<div class="editor input-container{% if form.main_content.errors %} contains-error{% endif %}">
+				<div class="label-error-container">
+				    <label for="id_main_content">Main Content</label>
+				    {{ form.main_content.errors }}
+				</div>
+			    {{ form.main_content }}
+			    <div id="editor_id_main_content"></div>
+			</div>
 
-          <form action="" method="POST" encytype="multipart/form-data">
-            {% csrf_token %}
-            <div class="error" style="display:none;"></div>
+			<div class="editor input-container{% if form.css.errors %} contains-error{% endif %}">
+				<div class="label-error-container">
+				    <label for="id_css">CSS</label>
+				    {{ form.css.errors }}
+				</div>
+			    {{ form.css }}
+			    <div id="editor_id_css"></div>
+			</div>
 
-            <label for="id_page_template">Page Template</label>
-            {{ form.page_template.errors }}
-            {{ form.page_template }}
-            <br/>
+			<div class="editor input-container{% if form.footer_content.errors %} contains-error{% endif %}">
+				<div class="label-error-container">
+				    <label for="id_footer_content">Footer Content</label>
+				    {{ form.footer_content.errors }}
+				</div>
+			    {{ form.footer_content }}
+			    <div id="editor_id_footer_content"></div>
+			</div>
+		</fieldset>
+	</div>
 
-            <label for="id_user_template">User Template</label>
-            {{ form.user_template.errors }}
-            {{ form.user_template }}
-            <br/>
+    <div class="col-2">
+	    <fieldset>
+	    	<button class="primary-action btn" type="">Save & Continue Editing</button>
+	    	<button class="btn" type="submit">Save</button>
+	    </fieldset>
+	    
+	    <fieldset {% if form.page_template.errors or form.user_template.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Templates</legend>
+	    	<div class="input-container">
+			    <label for="id_page_template">Page Template</label>
+			    {{ form.page_template.errors }}
+			    {{ form.page_template }}
+	    	</div>
+			<div class="input-container">
+			    <label for="id_user_template">User Template</label>
+			    {{ form.user_template.errors }}
+			    {{ form.user_template }}
+			</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.title.errors or form.slug.errors or form.meta_description.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Page Details</legend>
+	    	
+	    	<div class="input-container">
+			    <label for="id_title">Page Title</label>
+			    {{ form.title.errors }}
+			    {{ form.title }}
+	    	</div>
+	    	
+	    	<div class="input-container">
+			    <label for="id_slug">URL</label>
+			    {{ form.slug.errors }}
+			    {{ form.slug }}
+	    	</div>
+	    	<div class="input-container">
+			    <label for="id_meta_description">Meta Description</label>
+			    {{ form.meta_description.errors }}
+			    {{ form.meta_description }}
+			    <span class="input-note">Also used for Facebook open graph description</span>
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.main_image.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Social Network Image</legend>
+	    	<div class="input-container">
+			    <label for="id_main_image">Main Image</label>
+			    {{ form.main_image.errors }}
+			    {{ form.main_image }}
+			    <span class="input-note">Used for Facebook's open graph image</span>
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.sites.errors %}class="contains-error"{% endif %}>
+	    	<legend class="visuallyhidden">Sites</legend>
+	    	<div class="input-container">
+		    	<label for="id_head_content">Sites</label>
+			    {{ form.sites.errors }}
+			    {{ form.sites }}
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset {% if form.comments.errors %}class="contains-error"{% endif %}>
+		    <legend class="visuallyhidden">Commenting</legend>
+	    	<div class="input-container">
+		    	<label for="id_head_content">Comments</label>
+			    {{ form.comments.errors }}
+			    {{ form.comments }}
+	    	</div>
+	    </fieldset>
+	    
+	    <fieldset>
+	    	<legend class="visuallyhidden">Permanently Delete Page</legend> 
+	    	<a class="destructive-action" href="" title="Delete Page &amp; Resources">Delete Page</a>
+	    </fieldset>
+    </div>
+</form>
+{% endblock content %}
 
-            <label for="id_parent_page">Parent Page</label>
-            {{ form.parent_page.errors }}
-            {{ form.parent_page }}
-            <br/>
-
-            <label for="id_stylesheet">Page Stylesheet</label>
-            {{ form.stylesheet.errors }}
-            {{ form.stylesheet }}
-            <br/>
-
-            <label for="id_title">Page Title</label>
-            {{ form.title.errors }}
-            {{ form.title }}
-            <br/>
-
-            <label for="id_url">URL</label>
-            {{ form.url.errors }}
-            {{ form.url }}
-            <br/>
-
-            <label for="id_meta_description">Meta Description</label><br/>
-            {{ form.meta_description.errors }}
-            {{ form.meta_description }}
-            <br/>
-
-            <label for="id_main_image">Main Image</label><br/>
-            {{ form.main_image.errors }}
-            {{ form.main_image }}
-            <br/>
-
-            <label for="id_head_content">Head Content</label>
-            {{ form.head_content.errors }}
-            {{ form.head_content }}
-            <div id="editor_id_head_content"></div>
-            <br/>
-
-            <label for="id_main_content">Main Content</label>
-            {{ form.main_content.errors }}
-            {{ form.main_content }}
-            <div id="editor_id_main_content"></div>
-            <br/>
-
-            <label for="id_css">CSS</label>
-            {{ form.css.errors }}
-            {{ form.css }}
-            <div id="editor_id_css"></div>
-            <br/>
-
-            <label for="id_footer_content">Footer Content</label>
-            {{ form.footer_content.errors }}
-            {{ form.footer_content }}
-            <div id="editor_id_footer_content"></div>
-            <br/>
-
-            <label for="id_head_content">Sites</label><br/>
-            {{ form.sites.errors }}
-            {{ form.sites }}
-            <br/>
-
-            <label for="id_head_content">Comments</label>
-            {{ form.comments.errors }}
-            {{ form.comments }}
-            <br/>
-
-            <button type="submit">Save</button>
-
-          </form>
-
-          {% for template in user_templates %}
-          <div id="user-main_content-{{ template.id }}" style="display: none;">{{ template.main_content|safe }}</div>
-          <div id="user-css-{{ template.id }}" style="display: none;">{{ template.css|safe }}</div>
-          {% endfor %}
-
-        </div>
-
+{% block footer %}
         <!-- start ace editor setup -->
         <script src="{% static 'js/ace/ace.js' %}" data-ace-base="{% static 'js/ace' %}" type="text/javascript" charset="utf-8"></script>
 
@@ -176,6 +207,4 @@
                 aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
             }
         </script>
-
-    </body>
-</html>
+{% endblock footer %}

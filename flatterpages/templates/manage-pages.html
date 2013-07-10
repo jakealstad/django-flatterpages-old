@@ -1,21 +1,33 @@
+{% extends "app-base.html" %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Manage Pages</title>
 
-     <link rel="stylesheet" href="{% static 'css/flatterpages.css' %}" />
-  </head>
+{% block page_title %}
+	Page List - {{ block.super }}
+{% endblock page_title %}
 
-  <body>
+{% block content %}
+<h1>Manage Pages</h1>
 
-  	{% include 'navigation.html' %}
+<a href="{% url flatterpages.views.create_page %}">Create New Page</a>
 
-  	<h2>Manage Pages</h2>
-	{% for page in pages %}
-	<a href="{% url flatterpages.views.render_page  page.url %}">{{ page }}</a> - <a href="{% url flatterpages.views.edit_page page.url %}">edit</a> - <a href="{% url flatterpages.views.delete_page page.url %}">delete</a>
-	<br/>
-	{% endfor %}
-
-  </body>
-</html>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>URL</th>
+			<th>Last Updated</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for page in pages %}
+		<tr>
+			<td><a href="{% url flatterpages.views.edit_page page.slug %}">{{ page.title }}</a></td>
+			<td><a href="{% url flatterpages.views.render_page  page.slug %}" title="">{{ page.slug }}</a></td>
+			<td>Date in da past goes here</td>
+			<td><a href="{% url flatterpages.views.delete_page page.slug %}" title="">Delete</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

@@ -43,9 +43,6 @@ def edit_page(request, url):
 def render_page(request, url):
 	page = get_object_or_404(Page, url=url)
 
-	if page.parent_page:
-		print str(page.parent_page) + '>' + str(page)
-
 	return render(request, 'base.html', {
 		'page': page,
 		})

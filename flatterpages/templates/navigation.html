@@ -1,14 +1,11 @@
-<a href="{% url flatterpages.views.create_page %}">Create New Page</a>
-<a href="{% url flatterpages.views.manage_pages %}">Manage Pages</a>
-<span>|</span>
-<a href="{% url flatterpages.views.create_user_template %}">Create New User Template</a>
-<a href="{% url flatterpages.views.manage_user_templates %}">Manage User Templates</a>
-<span>|</span>
-<a href="{% url flatterpages.views.create_stylesheet %}">Create Stylesheet</a>
-<a href="{% url flatterpages.views.manage_stylesheets %}">Manage Stylesheets</a>
-{% if user.is_superuser %}
-<span>|</span>
-<a href="{% url flatterpages.views.create_page_template %}">Create New Page Template</a>
-<a href="{% url flatterpages.views.manage_page_templates %}">Manage Page Templates</a>
-{% endif %}
-<hr/>
+<nav>
+	<ul>
+		<li><a href="{% url flatterpages.views.manage_pages %}">Page List</a></li>
+		<li><a href="{% url flatterpages.views.manage_user_templates %}">User Templates</a></li>
+		{% if user.is_superuser %}
+		<li><a href="{% url flatterpages.views.manage_page_templates %}">Page Templates</a></li>
+		{% else %}
+		<li><a href="{% url flatterpages.views.manage_user_templates %}">My Templates</a></li>		
+		{% endif %}
+	</ul>
+</nav>

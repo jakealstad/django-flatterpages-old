@@ -15,21 +15,21 @@
     <div class="error" style="display:none;"></div>
     <fieldset>
     	<legend class="visuallyhidden">Markup &amp; CSS</legend>
-    	<div class="editor input-container">
+    	<div class="editor input-container{% if form.main_content.errors %} contains-error{% endif %}">
     		<div class="label-error-container">
     		    <label for="id_main_content">Markup</label>
+    		    {{ form.main_content.errors }}
     		</div>
-    		{{ form.main_content.errors }}
     		{{ form.main_content }}
     		<div id="editor_id_main_content"></div>
     	</div>
 
         {% if form.user %}
-        <div class="editor input-container">
+        <div class="editor input-container{% if form.css.errors %} contains-error{% endif %}">
     		<div class="label-error-container">
     		    <label for="id_css">CSS</label>
+    		    {{ form.css.errors }}
     		</div>
-    		{{ form.css.errors }}
     		{{ form.css }}
     		<div id="editor_id_css"></div>
         </div>
@@ -38,12 +38,12 @@
   	</div>
   	<div class="col-2">
       	<fieldset>
+      		<legend class="visuallyhidden">Form Actions</legend>
 	    	<button class="primary-action btn" type="submit">Save</button>
-	    	<button class="btn" type="">Save & Continue Editing</button>
       	</fieldset>
       	
   		{% if form.user %}
-       	<fieldset>
+       	<fieldset{% if form.user.errors %} class="contains-error"{% endif %}>
   			<div class="input-container">
     		    <label for="id_user">User</label>
     		    {{ form.user.errors }}
@@ -52,7 +52,7 @@
       	</fieldset>
       	{% endif %}
       	
-      	<fieldset>
+      	<fieldset{% if form.title.errors %} class="contains-error"{% endif %}>
       		<div class="input-container">
     		    <label for="id_title">Template Title</label>
     		    {{ form.title.errors }}

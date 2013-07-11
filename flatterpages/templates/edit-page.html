@@ -54,11 +54,12 @@
 
     <div class="col-2">
 	    <fieldset>
-	    	<button class="primary-action btn" type="">Save & Continue Editing</button>
-	    	<button class="btn" type="submit">Save</button>
+	    	<legend class="visuallyhidden">Form Actions</legend>
+	    	<button class="primary-action btn" type="submit">Save</button>
+	    	<button class="secondary-action btn" type="">Save & Continue Editing</button>
 	    </fieldset>
 	    
-	    <fieldset {% if form.page_template.errors or form.user_template.errors %}class="contains-error"{% endif %}>
+	    <fieldset{% if form.page_template.errors or form.user_template.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Templates</legend>
 	    	<div class="input-container">
 			    <label for="id_page_template">Page Template</label>
@@ -72,7 +73,7 @@
 			</div>
 	    </fieldset>
 	    
-	    <fieldset {% if form.title.errors or form.slug.errors or form.meta_description.errors %}class="contains-error"{% endif %}>
+	    <fieldset{% if form.title.errors or form.url.errors or form.meta_description.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Page Details</legend>
 	    	
 	    	<div class="input-container">
@@ -83,8 +84,8 @@
 	    	
 	    	<div class="input-container">
 			    <label for="id_slug">URL</label>
-			    {{ form.slug.errors }}
-			    {{ form.slug }}
+			    {{ form.url.errors }}
+			    {{ form.url }}
 	    	</div>
 	    	<div class="input-container">
 			    <label for="id_meta_description">Meta Description</label>
@@ -94,7 +95,7 @@
 	    	</div>
 	    </fieldset>
 	    
-	    <fieldset {% if form.main_image.errors %}class="contains-error"{% endif %}>
+	    <fieldset{% if form.main_image.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Social Network Image</legend>
 	    	<div class="input-container">
 			    <label for="id_main_image">Main Image</label>
@@ -104,7 +105,7 @@
 	    	</div>
 	    </fieldset>
 	    
-	    <fieldset {% if form.sites.errors %}class="contains-error"{% endif %}>
+	    <fieldset{% if form.sites.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Sites</legend>
 	    	<div class="input-container">
 		    	<label for="id_head_content">Sites</label>
@@ -113,7 +114,7 @@
 	    	</div>
 	    </fieldset>
 	    
-	    <fieldset {% if form.comments.errors %}class="contains-error"{% endif %}>
+	    <fieldset{% if form.comments.errors %} class="contains-error"{% endif %}>
 		    <legend class="visuallyhidden">Commenting</legend>
 	    	<div class="input-container">
 		    	<label for="id_head_content">Comments</label>

@@ -33,15 +33,15 @@ define('ace/theme/monokai', ['require', 'exports', 'module' , 'ace/lib/dom'], fu
 exports.isDark = true;
 exports.cssClass = "ace-monokai";
 exports.cssText = ".ace-monokai .ace_gutter {\
-background: #2F3129;\
-color: #8F908A\
+background: #303030;\
+color: #8f8f8f\
 }\
 .ace-monokai .ace_print-margin {\
-width: 1px;\
+width: 0px;\
 background: #555651\
 }\
 .ace-monokai {\
-background-color: #272822;\
+background-color: #292929;\
 color: #F8F8F2\
 }\
 .ace-monokai .ace_cursor {\
@@ -52,7 +52,7 @@ border-left: 0px;\
 border-bottom: 1px solid #F8F8F0\
 }\
 .ace-monokai .ace_marker-layer .ace_selection {\
-background: #49483E\
+background: #4a4a4a\
 }\
 .ace-monokai.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #272822;\
@@ -66,7 +66,7 @@ margin: -1px 0 0 -1px;\
 border: 1px solid #49483E\
 }\
 .ace-monokai .ace_marker-layer .ace_active-line {\
-background: #202020\
+background: #4f4f4f\
 }\
 .ace-monokai .ace_gutter-active-line {\
 background-color: #272727\

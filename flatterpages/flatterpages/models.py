@@ -9,6 +9,9 @@ class PageTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
 	main_content = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+	last_updated_by = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return self.title
@@ -20,6 +23,8 @@ class UserTemplate(models.Model):
 	css = models.TextField()
 	main_content = models.TextField()
 	user = models.ForeignKey(User)
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
 		return self.title
@@ -28,6 +33,9 @@ class UserTemplate(models.Model):
 class Stylesheet(models.Model):
 	title = models.CharField(max_length=100)
 	css = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+	last_updated_by = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return self.title
@@ -49,15 +57,18 @@ class Page(models.Model):
 	page_template = models.ForeignKey(PageTemplate)
 	user_template = models.ForeignKey(UserTemplate, blank=True, null=True)
 	stylesheet = models.ForeignKey(Stylesheet, blank=True, null=True)
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+	last_updated_by = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return self.title
 
-	def save(self):
-		if self.parent_page:
-			print 'child'
-		else:
-			print 'parent'
+	# def save(self):
+	# 	if self.parent_page:
+	# 		print 'child'
+	# 	else:
+	# 		print 'parent'
 
 	def template(self):
 		return 'pagetemplates/' + str(self.page_template).lower() + '.html'

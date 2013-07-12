@@ -37,6 +37,7 @@ def edit_page(request, url):
 	return render(request, 'edit-page.html', {
 		'form': form,
 		'user_templates': user_templates,
+		'page': instance,
 		})
 
 

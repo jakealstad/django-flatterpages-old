@@ -16,7 +16,7 @@ class PageForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(PageForm, self).__init__(*args, **kwargs)
 
-	def save(self, commit=True):
+	def save(self, do_redirect=False, commit=True):
 		instance = super(PageForm, self).save(commit=commit)
 		write_to_file(instance, 'css')
 

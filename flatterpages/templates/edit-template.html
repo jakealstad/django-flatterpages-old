@@ -42,7 +42,7 @@
 	    	<button class="primary-action btn" type="submit">Save</button>
       	</fieldset>
       	
-  		{% if form.user %}
+  		  {% if form.user %}
        	<fieldset{% if form.user.errors %} class="contains-error"{% endif %}>
   			<div class="input-container">
     		    <label for="id_user">User</label>
@@ -59,6 +59,16 @@
     		    {{ form.title }}
       		</div>
       	</fieldset>
+
+        {% if not form.user %}
+        <fieldset{% if form.last_updated_by.errors %} class="contains-error"{% endif %}>
+          <div class="input-container">
+            <label for="id_last_updated_by">Last Updated By</label>
+            {{ form.last_updated_by.errors }}
+            {{ form.last_updated_by }}
+          </div>
+        </fieldset>
+        {% endif %}
       	
 	    <fieldset>
 	    	<legend class="visuallyhidden">Permanently Delete Template</legend>

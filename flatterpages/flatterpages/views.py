@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
 
@@ -13,7 +14,11 @@ def create_page(request):
 	if request.method == 'POST':
 		form = PageForm(request.POST)
 		if form.is_valid():
-			form.save()
+			if 'save' in form.data:
+				form.save()
+				return redirect(manage_pages)
+			elif 'save_and_continue' in form.data:
+				form.save()
 	else:
 		form = PageForm()
 
@@ -30,7 +35,11 @@ def edit_page(request, url):
 	instance = get_object_or_404(Page, url=url)
 	form = PageForm(request.POST or None, instance=instance)
 	if form.is_valid():
-		form.save()
+		if 'save' in form.data:
+			form.save()
+			return redirect(manage_pages)
+		elif 'save_and_continue' in form.data:
+			form.save()
 	
 	user_templates = UserTemplate.objects.filter(user=request.user)
 
@@ -72,6 +81,7 @@ def create_page_template(request):
 		form = PageTemplateForm(request.POST)
 		if form.is_valid():
 			form.save()
+			return redirect(manage_page_templates)
 
 	else:
 		form = PageTemplateForm()
@@ -87,6 +97,7 @@ def create_user_template(request):
 		form = UserTemplateForm(request.POST)
 		if form.is_valid():
 			form.save()
+			return redirect(manage_user_templates)
 
 	else:
 		form = UserTemplateForm()
@@ -102,6 +113,7 @@ def edit_page_template(request, id):
 	form = PageTemplateForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
+		return redirect(manage_page_templates)
 
 	return render(request, 'edit-template.html', {
 		'form': form,
@@ -114,6 +126,7 @@ def edit_user_template(request, id):
 	form = UserTemplateForm(request.POST or None, instance=instance)
 	if form.is_valid():
 		form.save()
+		return redirect(manage_user_templates)
 
 	return render(request, 'edit-template.html', {
 		'form': form,

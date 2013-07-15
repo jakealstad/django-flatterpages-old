@@ -55,12 +55,17 @@
     <div class="col-2">
 	    <fieldset>
 	    	<legend class="visuallyhidden">Form Actions</legend>
-	    	<button class="primary-action btn" type="submit">Save</button>
-	    	<button class="secondary-action btn" type="">Save & Continue Editing</button>
+	    	<button class="primary-action btn" name="save" type="submit">Save</button>
+	    	<button class="secondary-action btn" name="save_and_continue" type="submit">Save &amp; Continue Editing</button>
 	    </fieldset>
 	    
 	    <fieldset{% if form.page_template.errors or form.user_template.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Templates</legend>
+	    	<div class="input-container">
+			    <label for="id_parent_page">Parent Page</label>
+			    {{ form.parent_page.errors }}
+			    {{ form.parent_page }}
+	    	</div>
 	    	<div class="input-container">
 			    <label for="id_page_template">Page Template</label>
 			    {{ form.page_template.errors }}
@@ -111,6 +116,11 @@
 		    	<label for="id_head_content">Sites</label>
 			    {{ form.sites.errors }}
 			    {{ form.sites }}
+	    	</div>
+	    	<div class="input-container">
+		    	<label for="id_last_updated_by">Last Updated By</label>
+			    {{ form.last_updated_by.errors }}
+			    {{ form.last_updated_by }}
 	    	</div>
 	    </fieldset>
 	    

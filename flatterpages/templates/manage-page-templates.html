@@ -21,8 +21,9 @@
 	</thead>
 	<tbody>
     	{% for template in templates %}
+
 	    <tr>
-		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}" title="Edit: {{ template }}">{{ template }}</a></td>
+		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}" title="Edit: {{ template.title }}">{{ template.title }}</a></td>
 		    <td>{{ template.created }}</td>
 		    <td>{{ template.updated }}</td>
 		    <td><a href="{% url flatterpages.views.delete_page_template template.id %}" title="Delete: {{ template }}">Delete</a></td>

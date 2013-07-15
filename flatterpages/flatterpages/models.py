@@ -64,12 +64,6 @@ class Page(models.Model):
 	def __unicode__(self):
 		return self.title
 
-	# def save(self):
-	# 	if self.parent_page:
-	# 		print 'child'
-	# 	else:
-	# 		print 'parent'
-
 	def template(self):
 		return 'pagetemplates/' + str(self.page_template).lower() + '.html'
 	

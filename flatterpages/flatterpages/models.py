@@ -17,6 +17,18 @@ class PageTemplate(models.Model):
 		return self.title
 
 
+class Stylesheet(models.Model):
+	
+	title = models.CharField(max_length=100)
+	css = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+	last_updated_by = models.ForeignKey(User)
+
+	def __unicode__(self):
+		return self.title
+
+
 class UserTemplate(models.Model):
 
 	title = models.CharField(max_length=100)
@@ -25,17 +37,7 @@ class UserTemplate(models.Model):
 	user = models.ForeignKey(User)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
-
-	def __unicode__(self):
-		return self.title
-
-
-class Stylesheet(models.Model):
-	title = models.CharField(max_length=100)
-	css = models.TextField()
-	created = models.DateTimeField(auto_now_add=True)
-	updated = models.DateTimeField(auto_now=True)
-	last_updated_by = models.ForeignKey(User)
+	global_css = models.ForeignKey(Stylesheet, blank=True, null=True)
 
 	def __unicode__(self):
 		return self.title

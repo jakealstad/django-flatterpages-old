@@ -135,9 +135,14 @@
 	    {% if page %}
 	    <fieldset>
 	    	<legend class="visuallyhidden">Permanently Delete Page</legend> 
-	    	<a class="destructive-action" href="{% url flatterpages.views.delete_page page.url %}" title="Delete Page &amp; Resources">Delete Page</a>
+	    	<a class="destructive-action" title="Delete Page &amp; Resources">Delete Page</a>
 	    </fieldset>
         {% endif %}
+
+        {% for template in user_templates %}
+		<div id="user-main_content-{{ template.id }}" style="display: none;">{{ template.main_content|safe }}</div>
+        <div id="user-css-{{ template.id }}" style="display: none;">{{ template.css|safe }}</div>
+        {% endfor %}
     </div>
 </form>
 {% endblock content %}
@@ -219,4 +224,17 @@
                 aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
             }
         </script>
+
+	    <script type="text/javascript" src="{{ STATIC_URL }}js/lightface/LightFace.js"></script>
+	    <script type="text/javascript">
+	        var deleteModal = new LightFace({
+	            title: 'Delete Page',
+	            content: 'Are you sure you want to <strong>DELETE</strong> this page?',
+	            buttons: [{'title': 'Delete', 'event': function() {window.location.replace('{% url flatterpages.views.delete_page page.url %}')}}, {'title': 'Cancel', 'event': function() {deleteModal.close();}}]
+	        });
+
+	        document.getElementsByClassName('destructive-action')[0].addEvent('click', function(e){
+	            deleteModal.open();
+	        });
+	    </script>
 {% endblock footer %}

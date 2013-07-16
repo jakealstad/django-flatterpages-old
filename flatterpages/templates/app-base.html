@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/flatterpages.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/lightface/LightFace.css" />
 
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
@@ -35,6 +36,8 @@
 
         <div class="footer-container">
             <footer class="wrapper">
+                <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+                <script src="{{ STATIC_URL }}js/mootools-more-1.4.0.1.js"></script>
             </footer>
         </div>
         {% block footer %}{% endblock footer %}

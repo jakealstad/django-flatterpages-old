@@ -50,6 +50,15 @@ def edit_page(request, url):
 		})
 
 
+@login_required
+def create_sub_page(request, url):
+	instance = get_object_or_404(Page, url=url)
+
+	return render(request, 'edit-page.html', {
+		'instance': instance,
+		})
+
+
 def render_page(request, url):
 	page = get_object_or_404(Page, url=url)
 
@@ -94,16 +103,23 @@ def create_page_template(request):
 @login_required
 def create_user_template(request):
 	if request.method == 'POST':
-		form = UserTemplateForm(request.POST)
-		if form.is_valid():
-			form.save()
+		css_dict = {
+			'title': request.POST['title'],
+			'css': request.POST['css'],
+			'last_updated_by': request.POST['user'],
+		}
+		css_form = StylesheetForm(css_dict)
+		template_form = UserTemplateForm(request.POST)
+		if template_form.is_valid():
+			template_form.save()
+			css_form.save()
 			return redirect(manage_user_templates)
 
 	else:
-		form = UserTemplateForm()
+		template_form = UserTemplateForm()
 
 	return render(request, 'edit-template.html', {
-		'form': form,
+		'form': template_form,
 		})
 
 
@@ -117,6 +133,7 @@ def edit_page_template(request, id):
 
 	return render(request, 'edit-template.html', {
 		'form': form,
+		'template': instance,
 		})
 
 
@@ -130,6 +147,7 @@ def edit_user_template(request, id):
 
 	return render(request, 'edit-template.html', {
 		'form': form,
+		'template': instance,
 		})
 
 

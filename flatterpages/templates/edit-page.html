@@ -225,6 +225,29 @@
             }
         </script>
 
+        <script type="text/javascript">
+        	//sub page inheritance from parent
+        	var parentSelector = document.getElementById("id_parent_page");
+        	var aceHeadContent = ace.edit("editor_id_head_content");
+        	var aceMainContent = ace.edit("editor_id_main_content");
+            var aceCSS = ace.edit("editor_id_css");
+            var aceFooterContent = ace.edit("editor_id_footer_content");
+
+            parentSelector.onclick = function() {
+            	var page = ((parentSelector.options).item(parentSelector.value)).innerHTML;
+            	parentRequest = new Request.JSON({
+            		url: '../get-parent-page/' + page,
+            		method: 'get',
+            		onSuccess: function(data) {
+            			aceHeadContent.getSession().setValue(data.head_content);
+            			aceMainContent.getSession().setValue(data.main_content);
+            			aceCSS.getSession().setValue(data.css);
+            			aceFooterContent.getSession().setValue(data.footer_content);
+            		}
+            	}).send()
+            }
+        </script>
+
 	    <script type="text/javascript" src="{{ STATIC_URL }}js/lightface/LightFace.js"></script>
 	    <script type="text/javascript">
 	        var deleteModal = new LightFace({
@@ -232,9 +255,14 @@
 	            content: 'Are you sure you want to <strong>DELETE</strong> this page?',
 	            buttons: [{'title': 'Delete', 'event': function() {window.location.replace('{% url flatterpages.views.delete_page page.url %}')}}, {'title': 'Cancel', 'event': function() {deleteModal.close();}}]
 	        });
+	        try {
+	        	document.getElementsByClassName('destructive-action')[0].addEvent('click', function(e){
+		            deleteModal.open();
+		        });
+	        }
+	        catch (e) {
 
-	        document.getElementsByClassName('destructive-action')[0].addEvent('click', function(e){
-	            deleteModal.open();
-	        });
+	        }
+	   
 	    </script>
 {% endblock footer %}

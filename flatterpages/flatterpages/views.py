@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
 
@@ -19,6 +19,8 @@ def create_page(request):
 				return redirect(manage_pages)
 			elif 'save_and_continue' in form.data:
 				form.save()
+				# redirect to edit view to prevent multiple copies of Page
+				return redirect(edit_page, url=form.data['url'])
 	else:
 		form = PageForm()
 
@@ -226,3 +228,28 @@ def delete_stylesheet(request, id):
 	instance.delete()
 
 	return redirect(manage_stylesheets)
+
+
+@login_required
+def get_parent_page(request, title):
+	page = get_object_or_404(Page, title=title)
+	
+	parent_page = {
+		'title': page.title,
+		'url': page.url,
+		'meta_description': page.meta_description,
+		'main_image': page.main_image,
+		'head_content': page.head_content,
+		'main_content': page.main_content,
+		'css': page.css,
+		'footer_content': page.footer_content,
+		'sites': str(page.sites),
+		'page_template': str(page.page_template),
+		'user_template': page.user_template,
+		'stylesheet': page.stylesheet,
+		'last_updated_by': str(page.last_updated_by),
+	}
+
+	page = json.dumps(parent_page)
+
+	return HttpResponse(page, mimetype='application/json')

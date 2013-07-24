@@ -16,9 +16,22 @@ class PageForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(PageForm, self).__init__(*args, **kwargs)
 
-	def save(self, do_redirect=False, commit=True):
+	def save(self, commit=True):
 		instance = super(PageForm, self).save(commit=commit)
 		write_to_file(instance, 'css')
+		
+		# if Page.objects.get(url=self.data['url']):
+		# 	print 'whoops'
+
+		# if not instance.stylesheet:
+		# 	new_stylesheet = Stylesheet(title=instance.title, css=instance.css, last_updated_by=instance.last_updated_by)
+		# 	new_stylesheet.save()
+		# 	instance.stylesheet = new_stylesheet
+		# else:
+		# 	instance.stylesheet = instance.css
+		# 	instance.stylesheet.save()
+
+		# print instance.stylesheet
 
 		return instance
 

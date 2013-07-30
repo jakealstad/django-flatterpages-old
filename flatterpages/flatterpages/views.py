@@ -11,6 +11,7 @@ from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Sty
 
 @login_required
 def create_page(request):
+	print 'create page view'
 	if request.method == 'POST':
 		form = PageForm(request.POST)
 		if form.is_valid():
@@ -34,6 +35,7 @@ def create_page(request):
 
 @login_required
 def edit_page(request, url):
+	print 'edit page view'
 	instance = get_object_or_404(Page, url=url)
 	form = PageForm(request.POST or None, instance=instance)
 	if form.is_valid():
@@ -243,10 +245,10 @@ def get_parent_page(request, title):
 		'main_content': page.main_content,
 		'css': page.css,
 		'footer_content': page.footer_content,
-		'sites': str(page.sites),
+		'sites': str(page.sites.all()),
 		'page_template': str(page.page_template),
-		'user_template': page.user_template,
-		'stylesheet': page.stylesheet,
+		'user_template': str(page.user_template),
+		'stylesheet': str(page.stylesheet),
 		'last_updated_by': str(page.last_updated_by),
 	}
 

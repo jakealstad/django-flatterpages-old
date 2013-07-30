@@ -14,24 +14,34 @@ class PageForm(forms.ModelForm):
 		model = Page
 
 	def __init__(self, *args, **kwargs):
+		initial = kwargs.get('initial', {})
+		initial['css'] = kwargs['instance'].stylesheet.css
+		kwargs['initial'] = initial
 		super(PageForm, self).__init__(*args, **kwargs)
 
-	def save(self, commit=True):
+		# print self.instance.stylesheet
+
+		# if self.instance.stylesheet:
+		# 	print 'setting from global stylesheet'
+		# 	self.fields["css"].initial = self.instance.stylesheet.css
+
+	def save(self, commit=False):
 		instance = super(PageForm, self).save(commit=commit)
 		write_to_file(instance, 'css')
-		
-		# if Page.objects.get(url=self.data['url']):
-		# 	print 'whoops'
 
-		# if not instance.stylesheet:
-		# 	new_stylesheet = Stylesheet(title=instance.title, css=instance.css, last_updated_by=instance.last_updated_by)
-		# 	new_stylesheet.save()
-		# 	instance.stylesheet = new_stylesheet
-		# else:
-		# 	instance.stylesheet = instance.css
-		# 	instance.stylesheet.save()
-
-		# print instance.stylesheet
+		if instance.stylesheet == None:
+			print 'creating new stylesheet'
+			new_stylesheet = Stylesheet(title=instance.title, css=instance.css, last_updated_by=instance.last_updated_by)
+			new_stylesheet.page = instance
+			new_stylesheet.save()
+			instance.stylesheet = new_stylesheet
+			instance.save()
+		else:
+			print 'updating existing stylesheet'
+			update_stylesheet = Stylesheet.objects.get(pk=instance.stylesheet.pk)
+			update_stylesheet.css = instance.css
+			update_stylesheet.save()
+			instance.save()
 
 		return instance
 

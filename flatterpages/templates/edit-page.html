@@ -76,6 +76,11 @@
 			    {{ form.user_template.errors }}
 			    {{ form.user_template }}
 			</div>
+			<div class="input-container">
+			    <label for="id_stylesheet">Stylesheet</label>
+			    {{ form.stylesheet.errors }}
+			    {{ form.stylesheet }}
+			</div>
 	    </fieldset>
 	    
 	    <fieldset{% if form.title.errors or form.url.errors or form.meta_description.errors %} class="contains-error"{% endif %}>
@@ -232,6 +237,13 @@
         	var aceMainContent = ace.edit("editor_id_main_content");
             var aceCSS = ace.edit("editor_id_css");
             var aceFooterContent = ace.edit("editor_id_footer_content");
+            var pageTitle = document.getElementById("id_title");
+            var pageUrl = document.getElementById("id_url");
+            var metaDescription = document.getElementById("id_meta_description");
+            var mainImage = document.getElementById("id_main_image");
+            var sites = document.getElementById("id_sites");
+            var lastUpdatedBy = document.getElementById("id_last_updated_by");
+            var comments = document.getElementById("id_comments");
 
             parentSelector.onclick = function() {
             	var page = ((parentSelector.options).item(parentSelector.value)).innerHTML;
@@ -243,6 +255,7 @@
             			aceMainContent.getSession().setValue(data.main_content);
             			aceCSS.getSession().setValue(data.css);
             			aceFooterContent.getSession().setValue(data.footer_content);
+            			pageTitle.value = data.title;
             		}
             	}).send()
             }

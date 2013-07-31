@@ -13,7 +13,7 @@ from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Sty
 def create_page(request):
 	print 'create page view'
 	if request.method == 'POST':
-		form = PageForm(request.POST)
+		form = PageForm(request.POST, user=request.user)
 		if form.is_valid():
 			if 'save' in form.data:
 				form.save()
@@ -23,7 +23,7 @@ def create_page(request):
 				# redirect to edit view to prevent multiple copies of Page
 				return redirect(edit_page, url=form.data['url'])
 	else:
-		form = PageForm()
+		form = PageForm(user=request.user)
 
 	user_templates = UserTemplate.objects.filter(user=request.user)
 
@@ -37,7 +37,7 @@ def create_page(request):
 def edit_page(request, url):
 	print 'edit page view'
 	instance = get_object_or_404(Page, url=url)
-	form = PageForm(request.POST or None, instance=instance)
+	form = PageForm(request.POST or None, instance=instance, user=request.user)
 	if form.is_valid():
 		if 'save' in form.data:
 			form.save()

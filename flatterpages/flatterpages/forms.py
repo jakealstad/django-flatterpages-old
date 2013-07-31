@@ -14,16 +14,17 @@ class PageForm(forms.ModelForm):
 		model = Page
 
 	def __init__(self, *args, **kwargs):
-		initial = kwargs.get('initial', {})
-		initial['css'] = kwargs['instance'].stylesheet.css
-		kwargs['initial'] = initial
+		user = kwargs.pop('user', None)
+		try:
+			initial = kwargs.get('initial', {})
+			initial['css'] = kwargs['instance'].stylesheet.css
+			kwargs['initial'] = initial
+		except KeyError:
+			pass
+
 		super(PageForm, self).__init__(*args, **kwargs)
 
-		# print self.instance.stylesheet
-
-		# if self.instance.stylesheet:
-		# 	print 'setting from global stylesheet'
-		# 	self.fields["css"].initial = self.instance.stylesheet.css
+		self.fields['last_updated_by'].initial = user
 
 	def save(self, commit=False):
 		instance = super(PageForm, self).save(commit=commit)

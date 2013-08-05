@@ -121,13 +121,13 @@ def delete_page(request, url):
 @login_required
 def create_page_template(request):
 	if request.method == 'POST':
-		form = PageTemplateForm(request.POST)
+		form = PageTemplateForm(request.POST, user=request.user)
 		if form.is_valid():
 			form.save()
 			return redirect(manage_page_templates)
 
 	else:
-		form = PageTemplateForm()
+		form = PageTemplateForm(user=request.user)
 
 	return render(request, 'edit-template.html', {
 		'form': form,
@@ -143,14 +143,14 @@ def create_user_template(request):
 			'last_updated_by': request.POST['user'],
 		}
 		css_form = StylesheetForm(css_dict)
-		template_form = UserTemplateForm(request.POST)
+		template_form = UserTemplateForm(request.POST, user=request.user)
 		if template_form.is_valid():
 			template_form.save()
 			css_form.save()
 			return redirect(manage_user_templates)
 
 	else:
-		template_form = UserTemplateForm()
+		template_form = UserTemplateForm(user=request.user)
 
 	return render(request, 'edit-template.html', {
 		'form': template_form,
@@ -160,7 +160,7 @@ def create_user_template(request):
 @login_required
 def edit_page_template(request, id):
 	instance = get_object_or_404(PageTemplate, id=id)
-	form = PageTemplateForm(request.POST or None, instance=instance)
+	form = PageTemplateForm(request.POST or None, instance=instance, user=request.user)
 	if form.is_valid():
 		form.save()
 		return redirect(manage_page_templates)
@@ -174,7 +174,7 @@ def edit_page_template(request, id):
 @login_required
 def edit_user_template(request, id):
 	instance = get_object_or_404(UserTemplate, id=id)
-	form = UserTemplateForm(request.POST or None, instance=instance)
+	form = UserTemplateForm(request.POST or None, instance=instance, user=request.user)
 	if form.is_valid():
 		form.save()
 		return redirect(manage_user_templates)
@@ -222,11 +222,11 @@ def delete_user_template(request, id):
 @login_required
 def create_stylesheet(request):
 	if request.method == 'POST':
-		form = StylesheetForm(request.POST)
+		form = StylesheetForm(request.POST, user=request.user)
 		if form.is_valid():
 			form.save()
 	else:
-		form = StylesheetForm()
+		form = StylesheetForm(user=request.user)
 
 	return render(request, 'edit-stylesheet.html', {
 		'form': form,

@@ -53,7 +53,9 @@ class PageTemplateForm(forms.ModelForm):
 		model = PageTemplate
 
 	def __init__(self, *args, **kwargs):
+		user = kwargs.pop('user', None)
 		super(PageTemplateForm, self).__init__(*args, **kwargs)
+		self.fields['last_updated_by'].initial = user
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
@@ -68,7 +70,9 @@ class UserTemplateForm(forms.ModelForm):
 		model = UserTemplate
 
 	def __init__(self, *args, **kwargs):
+		user = kwargs.pop('user', None)
 		super(UserTemplateForm, self).__init__(*args, **kwargs)
+		self.fields['user'].initial = user		
 
 	def save(self, commit=True):
 		instance = super(UserTemplateForm, self).save(commit=commit)
@@ -81,7 +85,9 @@ class StylesheetForm(forms.ModelForm):
 		model = Stylesheet
 
 	def __init__(self, *args, **kwargs):
+		user = kwargs.pop('user', None)
 		super(StylesheetForm, self).__init__(*args, **kwargs)
+		self.fields['last_updated_by'].initial = user
 
 	def save(self, commit=True):
 		instance = super(StylesheetForm, self).save(commit=commit)

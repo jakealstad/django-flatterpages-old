@@ -23,9 +23,9 @@
 	    {% for template in templates %}
 	    <tr>
 	    	<td><a href="{% url flatterpages.views.edit_user_template template.id %}">{{ template }}</a></td>
-	    	<td>Owner's Name</td>
-	    	<td>Last Updated Date</td>
-	    	<td>Date Created</td>
+	    	<td>{{ template.user }}</td>
+	    	<td>{{ template.updated }}</td>
+	    	<td>{{ template.created }}</td>
 	    	<td><a href="{% url flatterpages.views.delete_user_template template.id %}">Delete</a></td>
 	    </tr>
 	    {% endfor %}

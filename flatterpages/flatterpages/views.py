@@ -11,15 +11,16 @@ from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Sty
 
 @login_required
 def create_page(request):
-	print 'create page view'
 	if request.method == 'POST':
 		form = PageForm(request.POST, user=request.user)
 		if form.is_valid():
 			if 'save' in form.data:
 				form.save()
+				form.save_m2m()
 				return redirect(manage_pages)
 			elif 'save_and_continue' in form.data:
 				form.save()
+				form.save_m2m()
 				# redirect to edit view to prevent multiple copies of Page
 				return redirect(edit_page, url=form.data['url'])
 	else:
@@ -35,15 +36,16 @@ def create_page(request):
 
 @login_required
 def edit_page(request, url):
-	print 'edit page view'
 	instance = get_object_or_404(Page, url=url)
 	form = PageForm(request.POST or None, instance=instance, user=request.user)
 	if form.is_valid():
 		if 'save' in form.data:
 			form.save()
+			form.save_m2m()
 			return redirect(manage_pages)
 		elif 'save_and_continue' in form.data:
 			form.save()
+			form.save_m2m()
 	
 	user_templates = UserTemplate.objects.filter(user=request.user)
 
@@ -56,10 +58,38 @@ def edit_page(request, url):
 
 @login_required
 def create_sub_page(request, url):
-	instance = get_object_or_404(Page, url=url)
+	if request.method == 'POST':
+		form = PageForm(request.POST, user=request.user)
+		if form.is_valid():
+			if 'save' in form.data:
+				form.save()
+				form.save_m2m()
+				return redirect(manage_pages)
+			elif 'save_and_continue' in form.data:
+				form.save()
+				form.save_m2m()
+				return redirect(edit_page, url=form.data['url'])
+	else:
+		instance = get_object_or_404(Page, url=url)
+		form = PageForm(initial={
+			'title': instance.title,
+			'url': instance.url,
+			'meta_description': instance.meta_description,
+			'main_image': instance.main_image,
+			'head_content': instance.head_content,
+			'main_content': instance.main_content,
+			'css': instance.css,
+			'footer_content': instance.footer_content,
+			# 'sites': instance.sites,
+			'comments': instance.comments,
+			'page_template': instance.page_template,
+			'user_template': instance.user_template,
+			'stylesheet': instance.stylesheet,
+			'last_updated_by': request.user,
+			})
 
 	return render(request, 'edit-page.html', {
-		'instance': instance,
+		'form': form,
 		})
 
 

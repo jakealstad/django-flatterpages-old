@@ -221,13 +221,17 @@
         <script type="text/javascript">
             // auto-populate main content and css fields per user-templates
             var userTemplateSelector = document.getElementById("id_user_template");
+            console.log(userTemplateSelector);
             var aceMainContent = ace.edit("editor_id_main_content");
+            console.log(aceMainContent);
             var aceCSS = ace.edit("editor_id_css");
+            console.log(aceCSS);
 
             userTemplateSelector.onclick = function () {
+            	console.log('click');
                 aceMainContent.getSession().setValue(document.getElementById('user-main_content-' + userTemplateSelector.value).innerHTML);
                 aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
-            }
+            };
         </script>
 
     <!--<script type="text/javascript">

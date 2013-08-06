@@ -39,5 +39,6 @@ urlpatterns += patterns('',
     url(r'^flatterpages/manage-stylesheets/$', 'flatterpages.views.manage_stylesheets'),
     url(r'^flatterpages/delete-stylesheet/(?P<id>.*)/$', 'flatterpages.views.delete_stylesheet'),
     url(r'^flatterpages/get-parent-page/(?P<title>.*)/$', 'flatterpages.views.get_parent_page'),
+    url(r'^flatterpages/search/.*$', 'flatterpages.views.search'),
 	url(r'^(?P<url>.*)/$', 'flatterpages.views.render_page'),
 )

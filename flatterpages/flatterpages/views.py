@@ -7,6 +7,7 @@ from django.template import Context, Template
 
 from flatterpages.forms import PageForm, PageTemplateForm, UserTemplateForm, StylesheetForm
 from flatterpages.models import Page, PageMedia, PageTemplate, UserTemplate, Stylesheet
+from flatterpages.utils import normalize_query, get_query
 
 
 @login_required
@@ -285,3 +286,18 @@ def get_parent_page(request, title):
 	page = json.dumps(parent_page)
 
 	return HttpResponse(page, mimetype='application/json')
+
+
+def search(request):
+	query_string = ''
+	found_pages = None
+	if ('q' in request.GET) and request.GET['q'].strip():
+		query_string = request.GET['q']
+
+		page_query = get_query(query_string, ['title', 'url'])
+
+		found_pages = Page.objects.filter(page_query).order_by('-updated')
+
+		return render(request, 'manage-pages.html', {
+			'pages': found_pages,
+			})

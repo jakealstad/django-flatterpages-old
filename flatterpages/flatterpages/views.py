@@ -294,7 +294,7 @@ def search(request):
 	if ('q' in request.GET) and request.GET['q'].strip():
 		query_string = request.GET['q']
 
-		page_query = get_query(query_string, ['title',])
+		page_query = get_query(query_string, ['title', 'url'])
 
 		found_pages = Page.objects.filter(page_query).order_by('-updated')
 

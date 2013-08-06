@@ -8,6 +8,12 @@
 {% block content %}
 <h1>Manage Pages</h1>
 
+<form action="/flatterpages/search/" method="get">
+	<label for="id_q">Search:</label>
+	<input id="id_q" name="q" type="text">
+	<input type="submit" value="Submit">
+</form>
+
 <a href="{% url flatterpages.views.create_page %}">Create New Page</a>
 
 <table>

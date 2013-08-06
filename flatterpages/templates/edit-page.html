@@ -15,7 +15,7 @@
 			<legend class="visuallyhidden">Page Content</legend>
 			
 			<div class="editor input-container{% if form.head_content.errors %} contains-error{% endif %}">
-				<div class="label-error-container">
+				<div class="label-error-container clearfix">
 				    <label for="id_head_content ">Head Content</label>
 				    {{ form.head_content.errors }}
 				</div>
@@ -24,7 +24,7 @@
 			</div>
 			
 			<div class="editor input-container{% if form.main_content.errors %} contains-error{% endif %}">
-				<div class="label-error-container">
+				<div class="label-error-container clearfix">
 				    <label for="id_main_content">Main Content</label>
 				    {{ form.main_content.errors }}
 				</div>
@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="editor input-container{% if form.css.errors %} contains-error{% endif %}">
-				<div class="label-error-container">
+				<div class="label-error-container clearfix">
 				    <label for="id_css">CSS</label>
 				    {{ form.css.errors }}
 				</div>
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="editor input-container{% if form.footer_content.errors %} contains-error{% endif %}">
-				<div class="label-error-container">
+				<div class="label-error-container clearfix">
 				    <label for="id_footer_content">Footer Content</label>
 				    {{ form.footer_content.errors }}
 				</div>

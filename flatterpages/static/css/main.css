@@ -197,29 +197,15 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
 	padding: 0;
 }
 
-.form {
-	display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-	display: -moz-box;      /* OLD: Firefox (buggy) */ 
-	display: -ms-flexbox;   /* MID: IE 10 */
-	display: -webkit-flex;  /* NEW, Chrome 21+ */
-	display: flex;          /* NEW: Opera 12.1, Firefox 22+ */
-
-	-webkit-box-pack: space-around; 
-	-moz-box-pack: space-around; 
-	-ms-flex-pack: space-around; 
-	-webkit-justify-content: space-around;
-	justify-content: space-around;
-	
-	-webkit-flex-flow: row nowrap;
-}
-
 .col-1 {
-	-webkit-flex: 8;
-	margin-right: 40px;
+	float: left;
+	margin-right: 2.816901408%;
+	width: 70.833333333%;
 }
 
 .col-2 {
-	-webkit-flex: 2;
+	float: right;
+	width: 25%;
 }
 
 h1 + a {
@@ -247,33 +233,20 @@ h1 + a {
 }
 
 .label-error-container {
-	padding: 4px 10px;
-	
+	padding: 4px 0.847457627%;
 	color: #fff;
 	font-weight: 300;
-	
-	display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-	display: -moz-box;      /* OLD: Firefox (buggy) */ 
-	display: -ms-flexbox;   /* MID: IE 10 */
-	display: -webkit-flex;  /* NEW, Chrome 21+ */
-	display: flex;          /* NEW: Opera 12.1, Firefox 22+ */
-
-	-webkit-box-pack: space-between; 
-	-moz-box-pack: space-between; 
-	-ms-flex-pack: space-between; 
-	-webkit-justify-content: space-between;
-	justify-content: space-between;
-	
-	-webkit-flex-flow: row nowrap;
 }
 
 .label-error-container label {
-	-webkit-flex: 1;
+	float: left;
+	width: 24.583333333%;
 }
 
 .label-error-container .errorlist {
-	-webkit-flex: 3;
+	float: right;
 	text-align: right;
+	width: 73.75%;
 }
 
 .errorlist {
@@ -488,7 +461,23 @@ table a {
 	font-weight: 300;
 }
 
+tr th:first-child, tr td:first-child {
+    text-align: right;
+    padding-right: 25px;
+}
 
+@media only screen and (max-width: 980px) {
+    .col-1 {
+        float: none;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .col-2 {
+        float: none;
+        width: 100%;
+    }
+}
 
 
 /* ==========================================================================

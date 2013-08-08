@@ -31,18 +31,19 @@ class PageForm(forms.ModelForm):
 		write_to_file(instance, 'css')
 
 		if instance.stylesheet == None:
-			print 'creating new stylesheet'
 			new_stylesheet = Stylesheet(title=instance.title, css=instance.css, last_updated_by=instance.last_updated_by)
 			new_stylesheet.page = instance
 			new_stylesheet.save()
 			instance.stylesheet = new_stylesheet
 			instance.save()
 		else:
-			print 'updating existing stylesheet'
 			update_stylesheet = Stylesheet.objects.get(pk=instance.stylesheet.pk)
 			update_stylesheet.css = instance.css
 			update_stylesheet.save()
-			instance.save()
+			# save all pages in the group
+			pages = instance.stylesheet.page_set.all()
+			for page in pages:
+				page.save()
 
 		return instance
 

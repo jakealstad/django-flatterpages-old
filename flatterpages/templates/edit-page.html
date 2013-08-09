@@ -209,15 +209,6 @@
         </script>
         <!-- end ace editor setup -->
 
-        <!-- auto populate url -->
-        <!--<script src="{% static 'admin/js/urlify.js' %}" type="text/javascript"></script>
-        <script type="text/javascript">
-            document.getElementById("id_title").onkeyup = function() {
-                var e = document.getElementById("id_slug");
-                if (!e._changed) { e.value = URLify(document.getElementById("id_title").value, 50); }
-            }
-        </script>-->
-
         <script type="text/javascript">
             // auto-populate main content and css fields per user-templates
             var userTemplateSelector = document.getElementById("id_user_template");
@@ -233,37 +224,6 @@
                 aceCSS.getSession().setValue(document.getElementById('user-css-' + userTemplateSelector.value).innerHTML);
             };
         </script>
-
-    <!--<script type="text/javascript">
-        // 	//sub page inheritance from parent
-        // 	var parentSelector = document.getElementById("id_parent_page");
-        // 	var aceHeadContent = ace.edit("editor_id_head_content");
-        // 	var aceMainContent = ace.edit("editor_id_main_content");
-        //     var aceCSS = ace.edit("editor_id_css");
-        //     var aceFooterContent = ace.edit("editor_id_footer_content");
-        //     var pageTitle = document.getElementById("id_title");
-        //     var pageUrl = document.getElementById("id_url");
-        //     var metaDescription = document.getElementById("id_meta_description");
-        //     var mainImage = document.getElementById("id_main_image");
-        //     var sites = document.getElementById("id_sites");
-        //     var lastUpdatedBy = document.getElementById("id_last_updated_by");
-        //     var comments = document.getElementById("id_comments");
-
-        //     parentSelector.onclick = function() {
-        //     	var page = ((parentSelector.options).item(parentSelector.value)).innerHTML;
-        //     	parentRequest = new Request.JSON({
-        //     		url: '../get-parent-page/' + page,
-        //     		method: 'get',
-        //     		onSuccess: function(data) {
-        //     			aceHeadContent.getSession().setValue(data.head_content);
-        //     			aceMainContent.getSession().setValue(data.main_content);
-        //     			aceCSS.getSession().setValue(data.css);
-        //     			aceFooterContent.getSession().setValue(data.footer_content);
-        //     			pageTitle.value = data.title;
-        //     		}
-        //     	}).send()
-        //     }
-        </script>-->
 
 	    <script type="text/javascript" src="{{ STATIC_URL }}js/lightface/LightFace.js"></script>
 	    <script type="text/javascript">

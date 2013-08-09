@@ -37,10 +37,12 @@ class PageForm(forms.ModelForm):
 			instance.stylesheet = new_stylesheet
 			instance.save()
 		else:
+			print 'updating stylesheet'
 			update_stylesheet = Stylesheet.objects.get(pk=instance.stylesheet.pk)
 			update_stylesheet.css = instance.css
 			update_stylesheet.save()
 			# save all pages in the group
+			instance.save()
 			pages = instance.stylesheet.page_set.all()
 			for page in pages:
 				page.save()

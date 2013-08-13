@@ -25,24 +25,32 @@ class PageForm(forms.ModelForm):
 		super(PageForm, self).__init__(*args, **kwargs)
 
 		self.fields['last_updated_by'].initial = user
+		print self.fields['url'].initial
 
 	def save(self, commit=False):
 		instance = super(PageForm, self).save(commit=commit)
 		write_to_file(instance, 'css')
 
+		# remove leading and trailing slashes
+		url = str(instance.url).strip('/')
+		instance.url = url
+
 		if instance.stylesheet == None:
-			print 'creating new stylesheet'
 			new_stylesheet = Stylesheet(title=instance.title, css=instance.css, last_updated_by=instance.last_updated_by)
 			new_stylesheet.page = instance
 			new_stylesheet.save()
 			instance.stylesheet = new_stylesheet
 			instance.save()
 		else:
-			print 'updating existing stylesheet'
+			print 'updating stylesheet'
 			update_stylesheet = Stylesheet.objects.get(pk=instance.stylesheet.pk)
 			update_stylesheet.css = instance.css
 			update_stylesheet.save()
+			# save all pages in the group
 			instance.save()
+			pages = instance.stylesheet.page_set.all()
+			for page in pages:
+				page.save()
 
 		return instance
 

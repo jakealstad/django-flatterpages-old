@@ -35,7 +35,7 @@
 		{% for page in pages %}
 		<tr>
 			<td><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></td>
-			<td><a href="{% url flatterpages.views.render_page page.url %}" title="">{{ page.url }}</a></td>
+			<td><a href="{% url flatterpages.views.render_page page.url %}" title="">/{{ page.url }}/</a></td>
 			<td>{{ page.updated }}</td>
 			{% comment %}<td><a class="destructive-action" data-page-url="{{ page.url}}" title="">Delete</a></td>{% endcomment %}
 			<td><a href="{% url flatterpages.views.create_sub_page page.url %}" title="">Create Sub-page</a></td>

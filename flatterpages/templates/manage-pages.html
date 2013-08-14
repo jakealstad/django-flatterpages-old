@@ -37,16 +37,19 @@
 	</tbody>
 </table>
 
-{% autopaginate pages 2 %}
+{% autopaginate pages 30 %}
 {% for page in pages %}
 <ul>
 	{% if not page.parent_page %}
+		<!-- if you change this class, let me know, 
+		it needs to be changed in the js below -->
+		<li class="toggle">toggle</li>	
 		<li>{{ page }}</li>
-		{% for page in page.page_set.all %}
 		<ul>
+		{% for page in page.page_set.all %}
 			<li>{{ page }}</li>
-		</ul>
 		{% endfor %}
+		</ul>
 	{% endif %}
 </ul>
 {% endfor %}
@@ -55,3 +58,16 @@
 
 
 {% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+	$$('.toggle').each(function(item) {
+		var slideToggle = new Fx.Slide(item.getNext('ul'), {resetHeight: 'true'});
+		slideToggle.hide()
+		item.addEvent('click', function(e){
+			e.stop();
+			slideToggle.toggle();
+		});
+	});
+</script>
+{% endblock footer %}

@@ -1,5 +1,5 @@
 {% extends "app-base.html" %}
-{% load staticfiles %}
+{% load staticfiles pagination_tags %}
 
 {% block page_title %}
 	Page List - {{ block.super }}
@@ -15,7 +15,6 @@
 </form>
 
 <a href="{% url flatterpages.views.create_page %}">Create New Page</a>
-
 <table>
 	<thead>
 		<tr>
@@ -38,7 +37,7 @@
 	</tbody>
 </table>
 
-
+{% autopaginate pages 2 %}
 {% for page in pages %}
 <ul>
 	{% if not page.parent_page %}
@@ -51,6 +50,8 @@
 	{% endif %}
 </ul>
 {% endfor %}
+
+{% paginate %}
 
 
 {% endblock content %}

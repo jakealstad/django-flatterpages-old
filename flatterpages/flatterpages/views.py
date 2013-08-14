@@ -83,6 +83,7 @@ def create_sub_page(request, url):
 			'footer_content': instance.footer_content,
 			# 'sites': instance.sites,
 			'comments': instance.comments,
+			'parent_page': instance,
 			'page_template': instance.page_template,
 			'user_template': instance.user_template,
 			'stylesheet': instance.stylesheet,

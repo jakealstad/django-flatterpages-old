@@ -8,15 +8,15 @@
 {% block content %}
 <h1>Manage Pages</h1>
 
-<form action="/flatterpages/search/" method="get">
-	<label for="id_q">Search:</label>
-	<input id="id_q" name="q" type="text">
-	<input type="submit" value="Submit">
-</form>
-
 <a href="{% url flatterpages.views.create_page %}">Create New Page</a>
 
-<table>
+<form class="section-search-form" action="/flatterpages/search/" method="get">
+	<label class="visuallyhidden" for="id_q">Search:</label>
+	<input class="section-search" id="id_q" name="q" type="text" placeholder="Search pages..."><!--
+	--><input class="section-search-submit" type="submit" value="Search">
+</form>
+
+<table class="page-list-table">
 	<colgroup>
 		<col />
 		<col />
@@ -35,7 +35,7 @@
 		{% for page in pages %}
 		<tr>
 			<td><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></td>
-			<td><a href="{% url flatterpages.views.render_page page.url %}" title="">/{{ page.url }}/</a></td>
+			<td><a href="{% url flatterpages.views.render_page page.url %}" title="">{{ page.url }}</a></td>
 			<td>{{ page.updated }}</td>
 			{% comment %}<td><a class="destructive-action" data-page-url="{{ page.url}}" title="">Delete</a></td>{% endcomment %}
 			<td><a href="{% url flatterpages.views.create_sub_page page.url %}" title="">Create Sub-page</a></td>

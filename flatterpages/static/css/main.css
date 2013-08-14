@@ -11,8 +11,7 @@ textarea {
 }
 
 body {
-    font-size: 1em;
-    line-height: 1.4;
+    font: 100%/1.4 Helvetica, Helvetica Neue, Arial;
 }
 
 ::-moz-selection {
@@ -49,10 +48,6 @@ fieldset {
    Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
    ========================================================================== */
 
-body {
-    font: 16px/26px Helvetica, Helvetica Neue, Arial;
-}
-
 .wrapper {
     width: 90%;
     margin: 0 5%;
@@ -66,10 +61,6 @@ body,
 .footer-container,
 .main aside {
     background: #222;
-}
-
-.title {
-    color: white;
 }
 
 a:link,
@@ -90,40 +81,32 @@ a:focus {
    ============== */
    
 nav {
-
+    float: right;
+    width: 45%;
 }
 
 nav ul {
-	display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-	display: -moz-box;      /* OLD: Firefox (buggy) */ 
-	display: -ms-flexbox;   /* MID: IE 10 */
-	display: -webkit-flex;  /* NEW, Chrome 21+ */
-	display: flex;          /* NEW: Opera 12.1, Firefox 22+ */
-
-	-webkit-box-pack: flex-end; 
-	-moz-box-pack: flex-end; 
-	-ms-flex-pack: flex-end; 
-	-webkit-justify-content: flex-end;
-	justify-content: flex-end;
-	
-	-webkit-flex-flow: row nowrap;
-	
     margin: 0;
     padding: 0;
 }
 
-nav ul li {
-	-webkit-flex: 1;
-}
+nav a {
+    float: left;
+    width: 30%;
+    padding: 15px 1.5%;
 
-nav a:link,
-nav a:visited {
-    display: block;
     text-align: center;
     text-decoration: none;
     font-weight: 400;
-
     color: white;
+}
+
+nav li:last-child a {
+    margin-right: 0;
+}
+
+nav a:hover, nav a:visited {
+    color: #FFF;
 }
 
 nav a:hover,
@@ -187,14 +170,16 @@ background: #343434 url(https://raw.github.com/subtlepatterns/SubtlePatterns/mas
     -moz-box-shadow: 0px 0px 3px #0C0C0C;
 	-webkit-box-shadow: 0px 0px 3px #0C0C0C;
 	box-shadow: 0px 0px 3px #0C0C0C;
-	padding: 15px 0;
 }
 
 .title {
-	font-size: 20px;
+	font-size: 1.25em;
 	font-weight: 300;
-	margin: 0;
-	padding: 0;
+	
+    float: left;
+    margin: 0;
+	padding: 15px 0;
+    width: 10%;
 }
 
 .col-1 {
@@ -213,70 +198,15 @@ h1 + a {
 	margin-bottom: 25px;
 }
 
-.input-container {
-	margin-bottom: 15px;
-}
 
-.input-container.editor,
-.col-2 fieldset {
-	margin-bottom: 25px;
-}
-
-.input-container:last-child {
-	margin-bottom: 0px;
-}
-
-.input-container.editor {
-	-moz-box-shadow: 0px 0px 3px #0C0C0C;
-	-webkit-box-shadow: 0px 0px 3px #0C0C0C;
-	box-shadow: 0px 0px 3px #0C0C0C;
-}
-
-.label-error-container {
-	padding: 4px 0.847457627%;
-	color: #fff;
-	font-weight: 300;
-}
-
-.label-error-container label {
-	float: left;
-	width: 24.583333333%;
-}
-
-.label-error-container .errorlist {
-	float: right;
-	text-align: right;
-	width: 73.75%;
-}
-
-.errorlist {
-	list-style: none;
-	font-size: 87.5%;
-	color: #FF4141;
-	font-weight: 300;
-	margin: 0;
-	padding: 0;
-}
-
-.label-error-container,
-.col-2 fieldset {
-	background: #2C2C2C;
-}
-
-.col-2 fieldset {
-	border: 1px solid #3a3a3a;
-    -moz-box-shadow: 0px 0px 2px #8a8a8a;
-	-webkit-box-shadow: 0px 0px 2px #000000;
-	padding: 7%;
-}
-
-.col-2 fieldset.contains-error,
-.editor.contains-error {
-	border-top: 2px solid #FF4141;
-}
-
+/* ===============
+    Forms
+   =============== */
 input, textarea, select {
-	background: #383838;
+    color: #dadada;
+    font-weight: 300;
+
+	background: #424242;
 	border: 1px solid #1F1F1F;
 }
 
@@ -285,71 +215,137 @@ select {
 	display: block;
 }
 
+select,
+select option {
+    padding: 3%;
+}
+
 input,
 textarea {
-	color: #dadada;
-	font-weight: 300;
-	padding: 3%;
+     webkit-box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: inset 0 1px 1px 1px rgba(0,0,0,.07);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.07);
+    box-shadow: inset 0 1px 2px 1px rgba(0, 0, 0, 0.07);
+    padding: .6em;
 }
 
 input:focus,
 textarea:focus {
-	background: #FFF;
+    color: #fff;
+
+    background: #383838;
 	border: 1px solid #000;
-	color: #333;
+    webkit-box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, 0.00);
+    -moz-box-shadow: inset 0 1px 1px 1px rgba(0,0,0,.00);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.00);
+    box-shadow: inset 0 1px 2px 1px rgba(0, 0, 0, 0.00);
+    outline: none;
 }
 
-.col-2 label {
-	color: #ADADAD;
-	font-size: 14px;
-	font-weight: 300;
-	
-	vertical-align: top;
-}
-
-.col-2 input,
-.col-2 textarea,
-.col-2 select {
-	font-size: 87.5%;
-}
-
-.col-2 textarea {
-	height: 100px;
-}
-
-.col-2 input[type="text"],
-.col-2 textarea {
-	width: 94%;
-}
-
-.col-2 select {
-	width: 100%;
-}
-
+::-webkit-input-placeholder { color: #bbb; }
+::-moz-placeholder { color: #bbb; } /* firefox 19+ */
+:-ms-input-placeholder { color: #bbb; } /* ie */
+input:-moz-placeholder { color: #bbb; }
 
 input[type="checkbox"],
 input[type="radio"] {
-	float: left;
-	margin-right: 5px;
+    float: left;
+    margin-right: 5px;
 } 
+
+input[type="submit"] {
+    webkit-box-shadow: inset 0 1px 1px 1px rgba(0, 0, 0, 0.00);
+    -moz-box-shadow: inset 0 1px 1px 1px rgba(0,0,0,.00);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.00);
+    box-shadow: inset 0 1px 2px 1px rgba(0, 0, 0, 0.00);
+}
 
 .input-note {
 	color: #ADADAD;
-	font-size: 68.75%;
+	font-size: 0.6875em;
 	font-weight: 300;
 	line-height: 1em;
 	
+    display: block;
 	margin-top: 5px;
 }
 
 .btn {
 	background: #414141;
 	border: none;
-	padding: 3% 6%;
+	padding: .7em 1.4em;
 	
 	color: #fff;
-	font-size: 87.5%;
+	font-size: 0.875em;
 	font-weight: 300;
+}
+
+.primary-action {
+    background: #1175D1;
+}
+
+.primary-action:hover,
+.primary-action:focus {
+    background: #127ee3;
+}
+
+.primary-action:active {
+    background: #0f69bd;
+}
+
+.secondary-action {
+    background: #00A06C;
+}
+
+.secondary-action:hover,
+.secondary-action:focus {
+    background: #00b075;
+}
+
+.secondary-action:active {
+    background: #009161;
+}
+
+a.destructive-action {
+    color: #FF4141;
+    font-size: 0.875em;
+    font-weight: 300;
+}
+
+a.destructive-action:hover,
+a.destructive-action:focus {
+    color: #ff5757;
+}
+
+a.destructive-action:active {
+    color: #ff3030;
+}
+
+.col-2 label {
+    color: #e6e6e6;
+    font-size: 0.875em;
+    font-weight: 300;
+    
+    vertical-align: top;
+}
+
+.col-2 input,
+.col-2 textarea,
+.col-2 select {
+    font-size: 0.8125em;
+}
+
+.col-2 textarea {
+    height: 100px;
+}
+
+.col-2 input[type="text"],
+.col-2 textarea {
+    width: 94%;
+}
+
+.col-2 select {
+    width: 100%;
 }
 
 .col-2 .btn {
@@ -362,45 +358,43 @@ input[type="radio"] {
 	margin-bottom: 0;
 }
 
-.primary-action {
-	background: #1175D1;
+
+/* ===============
+    Search Forms
+   =============== */
+.section-search-form {
+    margin-bottom: 20px;
 }
 
-.primary-action:hover,
-.primary-action:focus {
-	background: #127ee3;
+.section-search {
+    background: #303030;
+
+    display: inline-block;
+    width: 25%;
 }
 
-.primary-action:active {
-	background: #0f69bd;
+.section-search:focus {
+    background: #303030;
+    color: #fff;
+    outline: none;
 }
 
-.secondary-action {
-	background: #00A06C;
+.section-search-submit {
+    color: #fff;
+
+    background: #3c3c3c;
+
+    display: inline-block;
+    border-left: none;
 }
 
-.secondary-action:hover,
-.secondary-action:focus {
-	background: #00b075;
+.section-search-submit:hover,
+.section-search-submit:focus {
+    background: #424242;
 }
 
-.secondary-action:active {
-	background: #009161;
-}
-
-a.destructive-action {
-	color: #FF4141;
-	font-size: 87.5%;
-	font-weight: 300;
-}
-
-a.destructive-action:hover,
-a.destructive-action:focus {
-	color: #ff5757;
-}
-
-a.destructive-action:active {
-	color: #ff3030;
+.section-search-submit:active {
+    background: #313131;
 }
 
 
@@ -461,12 +455,86 @@ table a {
 	font-weight: 300;
 }
 
-tr th:first-child, tr td:first-child {
+.page-list-table tr th:first-child, 
+.page-list-table tr td:first-child {
     text-align: right;
     padding-right: 25px;
 }
 
-@media only screen and (max-width: 980px) {
+/* ===============
+    Edit Page
+   =============== */
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input-container.editor,
+.col-2 fieldset {
+    margin-bottom: 25px;
+}
+
+.input-container:last-child {
+    margin-bottom: 0px;
+}
+
+.input-container.editor {
+    -moz-box-shadow: 0px 0px 3px #0C0C0C;
+    -webkit-box-shadow: 0px 0px 3px #0C0C0C;
+    box-shadow: 0px 0px 3px #0C0C0C;
+}
+
+.label-error-container {
+    padding: 0.3em 0.6em;
+    color: #fff;
+    font-weight: 300;
+}
+
+.label-error-container label {
+    float: left;
+    width: 24.583333333%;
+}
+
+.label-error-container .errorlist {
+    float: right;
+    text-align: right;
+    width: 73.75%;
+}
+
+.errorlist {
+    list-style: none;
+    font-size: 0.875em;
+    color: #FF4141;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+.label-error-container,
+.col-2 fieldset {
+    background: #2C2C2C;
+}
+
+.col-2 fieldset {
+    border: 1px solid #3a3a3a;
+    -moz-box-shadow: 0px 0px 2px #8a8a8a;
+    -webkit-box-shadow: 0px 0px 2px #000000;
+    padding: 8%;
+}
+
+.col-2 fieldset.contains-error,
+.editor.contains-error {
+    border-top: 2px solid #FF4141;
+}
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (max-width: 1090px) {
+    body {
+        font-size: 110%;
+    }
+
     .col-1 {
         float: none;
         width: 100%;
@@ -477,48 +545,11 @@ tr th:first-child, tr td:first-child {
         float: none;
         width: 100%;
     }
-}
 
-
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-
-@media only screen and (min-width: 480px) {
-
-/* ====================
-    INTERMEDIATE: Menu
-   ==================== */
-
-
-
-/* ========================
-    INTERMEDIATE: IE Fixes
-   ======================== */
-
-    nav ul li {
-        display: inline;
-    }
-
-    .oldie nav a {
-        margin: 0 0.7%;
+    .col-2 fieldset {
+        padding: 4%;
     }
 }
-
-@media only screen and (min-width: 768px) {
-
-/* ============
-    WIDE: Menu
-   ============ */
-
-    .title {
-        float: left;
-    }
-
-    nav {
-        float: right;
-        width: 38%;
-    }
 
 /* ==========================================================================
    Helper classes

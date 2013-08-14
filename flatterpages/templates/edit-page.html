@@ -61,11 +61,11 @@
 	    
 	    <fieldset{% if form.page_template.errors or form.user_template.errors %} class="contains-error"{% endif %}>
 	    	<legend class="visuallyhidden">Templates</legend>
-	    	{% comment %}<!-- <div class="input-container">
+	    	<div class="input-container">
 			    <label for="id_parent_page">Parent Page</label>
 			    {{ form.parent_page.errors }}
 			    {{ form.parent_page }}
-	    	</div> -->{% endcomment %}
+	    	</div>
 	    	<div class="input-container">
 			    <label for="id_page_template">Page Template</label>
 			    {{ form.page_template.errors }}

@@ -37,4 +37,20 @@
 		{% endfor %}
 	</tbody>
 </table>
+
+
+{% for page in pages %}
+<ul>
+	{% if not page.parent_page %}
+		<li>{{ page }}</li>
+		{% for page in page.page_set.all %}
+		<ul>
+			<li>{{ page }}</li>
+		</ul>
+		{% endfor %}
+	{% endif %}
+</ul>
+{% endfor %}
+
+
 {% endblock content %}

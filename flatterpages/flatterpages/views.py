@@ -300,14 +300,20 @@ def search(request):
 		found_pages = Page.objects.filter(page_query).order_by('-updated')
 		return_pages = []
 
-		print found_pages
-
 		for page in found_pages:
 			if page.parent_page:
 				parent = page.parent_page
 				if parent not in return_pages:
 					return_pages.append(parent)
+			elif not page.parent_page and page not in return_pages:
+				return_pages.append(page)
 
 		return render(request, 'manage-pages.html', {
 			'pages': return_pages,
+			})
+
+	else:
+		# return nothing is query is blank
+		return render(request, 'manage-pages.html', {
+			'pages': [],
 			})

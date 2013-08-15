@@ -298,7 +298,16 @@ def search(request):
 		page_query = get_query(query_string, ['title', 'url'])
 
 		found_pages = Page.objects.filter(page_query).order_by('-updated')
+		return_pages = []
+
+		print found_pages
+
+		for page in found_pages:
+			if page.parent_page:
+				parent = page.parent_page
+				if parent not in return_pages:
+					return_pages.append(parent)
 
 		return render(request, 'manage-pages.html', {
-			'pages': found_pages,
+			'pages': return_pages,
 			})

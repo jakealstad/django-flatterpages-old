@@ -6,16 +6,16 @@ from django.db.models import Q
 
 def write_to_file(instance, filetype):
 	if filetype == 'html':
-		extension = instance.main_content
+		content = instance.main_content
 		filedir = 'templates/pagetemplates/'
 	elif filetype == 'css':
-		extension = instance.css
+		content = instance.css
 		filedir = 'templates/css/'
 
 	if not path.isdir(filedir):
 		mkdir(filedir)
 	f = open(filedir + str(instance.title).lower() + '.' + filetype, 'w')
-	f.write(extension)
+	f.write(content)
 	f.close()
 
 	return

@@ -24,6 +24,7 @@ class Stylesheet(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	last_updated_by = models.ForeignKey(User)
+	path = models.CharField(max_length=200)
 
 	def __unicode__(self):
 		return self.title

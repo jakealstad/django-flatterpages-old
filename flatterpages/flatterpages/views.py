@@ -143,6 +143,7 @@ def create_user_template(request):
 			'title': request.POST['title'],
 			'css': request.POST['css'],
 			'last_updated_by': request.POST['user'],
+			'path': '.',
 		}
 		css_form = StylesheetForm(css_dict)
 		template_form = UserTemplateForm(request.POST, user=request.user)

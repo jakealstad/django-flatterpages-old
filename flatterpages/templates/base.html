@@ -4,11 +4,8 @@
 <html lang="en">
   <head>
     <meta description="{{ page.meta_description }}" />
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="{{ page.stylesheet.path }}">
     {{ page.head_content|render }}
-    <style>
-      {{ page.stylesheet.css|render }}
-    </style>
   </head>
 
   <body>

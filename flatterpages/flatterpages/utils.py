@@ -1,24 +1,31 @@
 import re
+from settings import base
 from os import path, mkdir
 
 from django.db.models import Q
 
 
-def write_to_file(instance, filetype):
-	if filetype == 'html':
-		content = instance.main_content
-		filedir = 'templates/pagetemplates/'
-	elif filetype == 'css':
-		content = instance.css
-		filedir = 'templates/css/'
+def write_to_file(title, instance, filetype):
+    static_url = base.STATIC_URL.lstrip('/')
 
-	if not path.isdir(filedir):
-		mkdir(filedir)
-	f = open(filedir + str(instance.title).lower() + '.' + filetype, 'w')
-	f.write(content)
-	f.close()
+    if filetype == 'html':
+        content = instance.main_content
+        filedir = 'templates/pagetemplates/'
+    elif filetype == 'css':
+        content = instance.css
+        filedir = static_url + '/css/pages/'
 
-	return
+    if not path.isdir(filedir):
+        mkdir(filedir)
+
+    filepath = filedir + str(title).lower() + '.' + filetype
+    f = open(filepath, 'w')
+    f.write(content)
+    f.close()
+
+    print filepath
+
+    return '/' + filepath
 
 
 def normalize_query(query_string,

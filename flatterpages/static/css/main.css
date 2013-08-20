@@ -576,7 +576,7 @@ table a {
 }
 
 .parent-page-list li {
-    padding-left: 2.5em; /* change to ems */
+    padding-left: 2.5em;
     position: relative;
 }
 
@@ -597,9 +597,17 @@ table a {
     padding: 0 .18em;
 }
 
+.parent-page-list li.empty-nester {
+    padding-left: 0;
+    margin-bottom: 0.3em;
+}
+
+.empty-nester .page-data-container {
+    padding-left: 3.45em;
+}
+
 .page-data-container {
     font-weight: 300;
-
     padding: 0.8em;
 }
 

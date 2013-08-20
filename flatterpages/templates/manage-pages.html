@@ -27,10 +27,10 @@
 {% for page in pages %}
 <ul class="parent-page-list">
 	{% if not page.parent_page %}
-	<!-- if you change this class, let me know, 
-	it needs to be changed in the js below -->	
 	<li class="clearfix">
-		<span class="toggle entypo">&#9662;</span>
+		{% if page.page_set.count > 0 %}
+		<span class="toggle entypo">&#9656;</span>
+		{% endif %}
 		<div class="page-data-container parent-page-container clearfix">
 			<span class="page-title"><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></span>
 			<span class="page-url"><a href="{% url flatterpages.views.render_page page.url %}" title="">/{{ page.url }}/</a></span>
@@ -38,6 +38,7 @@
 			<span class="create-subpage"><a href="{% url flatterpages.views.create_sub_page page.url %}" title="">Create Sub-page</a></span>
 		</div>
 	</li>
+	{% if page.page_set.count > 0 %}
 	<ul class="child-page-list">
 		{% for page in page.page_set.all %}
 		<li class="clearfix">
@@ -49,6 +50,7 @@
 		</li>
 		{% endfor %}
 	</ul>
+	{% endif %}
 	{% endif %}
 </ul>
 {% endfor %}
@@ -66,6 +68,15 @@
 		item.addEvent('click', function(e){
 			e.stop();
 			slideToggle.toggle();
+			console.log(item.innerHTML);
+			if (slideToggle.open) {
+				console.log('open');
+				item.innerHTML = '&#9656;';
+			} else {
+				console.log('close');
+				item.innerHTML = '&#9662;';
+			}
+			
 		});
 	});
 </script>

@@ -43,7 +43,7 @@
       	</fieldset>
       	
   		  {% if form.user %}
-       	<fieldset{% if form.user.errors %} class="contains-error"{% endif %}>
+       	<fieldset class="visuallyhidden"{% if form.user.errors %} class="contains-error"{% endif %}>
   			<div class="input-container">
     		    <label for="id_user">User</label>
     		    {{ form.user.errors }}
@@ -61,7 +61,7 @@
       	</fieldset>
 
         {% if not form.user %}
-        <fieldset{% if form.last_updated_by.errors %} class="contains-error"{% endif %}>
+        <fieldset class="visuallyhidden"{% if form.last_updated_by.errors %} class="contains-error"{% endif %}>
           <div class="input-container">
             <label for="id_last_updated_by">Last Updated By</label>
             {{ form.last_updated_by.errors }}

@@ -16,7 +16,6 @@
 			<th>Owner</th>
 			<th>Last Updated</th>
 			<th>Date Created</th>
-			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +25,6 @@
 	    	<td>{{ template.user }}</td>
 	    	<td>{{ template.updated }}</td>
 	    	<td>{{ template.created }}</td>
-	    	<td><a href="{% url flatterpages.views.delete_user_template template.id %}">Delete</a></td>
 	    </tr>
 	    {% endfor %}
 	</tbody>

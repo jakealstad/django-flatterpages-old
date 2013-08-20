@@ -61,7 +61,7 @@
 {% block footer %}
 <script type="text/javascript">
 	$$('.toggle').each(function(item) {
-		var slideToggle = new Fx.Slide(item.getNext('ul'), {resetHeight: 'true'});
+		var slideToggle = new Fx.Slide(item.getParent().getNext('ul'), {resetHeight: 'true'});
 		slideToggle.hide()
 		item.addEvent('click', function(e){
 			e.stop();

@@ -16,7 +16,6 @@
 			<th>Title</th>
 			<th>Date Created</th>
 			<th>Last Updated</th>
-			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,7 +25,6 @@
 		    <td><a href="{% url flatterpages.views.edit_page_template template.id %}" title="Edit: {{ template.title }}">{{ template.title }}</a></td>
 		    <td>{{ template.created }}</td>
 		    <td>{{ template.updated }}</td>
-		    <td><a href="{% url flatterpages.views.delete_page_template template.id %}" title="Delete: {{ template }}">Delete</a></td>
 	    </tr>
     {% endfor %}
 	</tbody>

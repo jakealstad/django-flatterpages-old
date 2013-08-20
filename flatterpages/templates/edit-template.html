@@ -15,8 +15,8 @@
     <div class="error" style="display:none;"></div>
     <fieldset>
     	<legend class="visuallyhidden">Markup &amp; CSS</legend>
-    	<div class="editor input-container{% if form.main_content.errors %} contains-error{% endif %}">
-    		<div class="label-error-container">
+    	<div class="editor input-container clearfix{% if form.main_content.errors %} contains-error{% endif %}">
+    		<div class="label-error-container clearfix">
     		    <label for="id_main_content">Markup</label>
     		    {{ form.main_content.errors }}
     		</div>
@@ -25,8 +25,8 @@
     	</div>
 
         {% if form.user %}
-        <div class="editor input-container{% if form.css.errors %} contains-error{% endif %}">
-    		<div class="label-error-container">
+        <div class="editor input-container clearfix{% if form.css.errors %} contains-error{% endif %}">
+    		<div class="label-error-container clearfix">
     		    <label for="id_css">CSS</label>
     		    {{ form.css.errors }}
     		</div>

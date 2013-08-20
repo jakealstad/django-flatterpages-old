@@ -6,8 +6,9 @@
 {% endblock page_title %}
 
 {% block content %}
-<h1>Create New Flatpage</h1>
-<form class="form" action="" method="POST" encytype="multipart/form-data">
+<h1>{% if page %}Editing: {{ page.title }}{% else %}Create New Flatpage{% endif %}</h1>
+{% if page %}<span class="page-updated-data"><a href="{% url flatterpages.views.render_page page.url %}" title="">View Page</a> | Last updated by ---- on month day, year time</span>{% endif %}
+<form class="form clearfix" action="" method="POST" encytype="multipart/form-data">
     {% csrf_token %}
     <div class="error" style="display:none;"></div>
 	<div class="col-1">

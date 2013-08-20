@@ -16,47 +16,39 @@
 	--><input class="section-search-submit" type="submit" value="Search">
 </form>
 
-<table class="page-list-table">
-	<colgroup>
-		<col />
-		<col />
-		<col />
-		<col />
-	</colgroup>
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>URL</th>
-			<th>Last Updated</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for page in pages %}
-		<tr>
-			<td><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></td>
-			<td><a href="{% url flatterpages.views.render_page page.url %}" title="">{{ page.url }}</a></td>
-			<td>{{ page.updated }}</td>
-			{% comment %}<td><a class="destructive-action" data-page-url="{{ page.url}}" title="">Delete</a></td>{% endcomment %}
-			<td><a href="{% url flatterpages.views.create_sub_page page.url %}" title="">Create Sub-page</a></td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
+<div class="page-list-header clearfix">
+	<span class="page-title">Page Title</span>
+	<span class="page-url">Page URL</span>
+	<span class="page-last-updated">Last Updated</span>
+	<span class="create-subpage"></span>
+</div>
 
 {% autopaginate pages 30 %}
 {% for page in pages %}
-<ul>
+<ul class="parent-page-list">
 	{% if not page.parent_page %}
-		<!-- if you change this class, let me know, 
-		it needs to be changed in the js below -->
-		<li class="toggle">toggle</li>	
-		<li>{{ page }}</li>
-		<ul>
+	<!-- if you change this class, let me know, 
+	it needs to be changed in the js below -->	
+	<li class="clearfix">
+		<span class="toggle entypo">&#9662;</span>
+		<div class="page-data-container parent-page-container clearfix">
+			<span class="page-title"><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></span>
+			<span class="page-url"><a href="{% url flatterpages.views.render_page page.url %}" title="">/{{ page.url }}/</a></span>
+			<span class="page-last-updated">{{ page.updated }}</span>
+			<span class="create-subpage"><a href="{% url flatterpages.views.create_sub_page page.url %}" title="">Create Sub-page</a></span>
+		</div>
+	</li>
+	<ul class="child-page-list">
 		{% for page in page.page_set.all %}
-			<li>{{ page }}</li>
+		<li class="clearfix">
+			<div class="page-data-container child-page-container clearfix">
+				<span class="page-title"><a href="{% url flatterpages.views.edit_page page.url %}">{{ page.title }}</a></span>
+				<span class="page-url"><a href="{% url flatterpages.views.render_page page.url %}" title="">/{{ page.url }}/</a></span>
+				<span class="page-last-updated">{{ page.updated }}</span>
+			</div>
+		</li>
 		{% endfor %}
-		</ul>
+	</ul>
 	{% endif %}
 </ul>
 {% endfor %}

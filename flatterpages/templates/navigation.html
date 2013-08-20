@@ -1,11 +1,11 @@
 <nav>
 	<ul>
-		<li><a href="{% url flatterpages.views.manage_pages %}">Page List</a></li>
-		<li><a href="{% url flatterpages.views.manage_user_templates %}">User Templates</a></li>
+		<li class="clearfix"><a href="{% url flatterpages.views.manage_pages %}">Page List</a></li>
+		<li class="clearfix"><a href="{% url flatterpages.views.manage_user_templates %}">User Templates</a></li>
 		{% if user.is_superuser %}
-		<li><a href="{% url flatterpages.views.manage_page_templates %}">Page Templates</a></li>
+		<li class="clearfix"><a href="{% url flatterpages.views.manage_page_templates %}">Page Templates</a></li>
 		{% else %}
-		<li><a href="{% url flatterpages.views.manage_user_templates %}">My Templates</a></li>		
+		<li class="clearfix"><a href="{% url flatterpages.views.manage_user_templates %}">My Templates</a></li>		
 		{% endif %}
 	</ul>
 </nav>

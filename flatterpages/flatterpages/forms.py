@@ -73,7 +73,7 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
-		write_to_file(instance, 'html')
+		write_to_file(instance.title, instance, 'html')
 
 		return instance
 

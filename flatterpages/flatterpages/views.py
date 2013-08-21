@@ -29,7 +29,7 @@ def create_page(request):
 
 	user_templates = UserTemplate.objects.filter(user=request.user)
 
-	return render(request, 'edit-page.html', {
+	return render(request, 'flatterpages/edit-page.html', {
 		'form': form,
 		'user_templates': user_templates,
 		})
@@ -50,7 +50,7 @@ def edit_page(request, url):
 	
 	user_templates = UserTemplate.objects.filter(user=request.user)
 
-	return render(request, 'edit-page.html', {
+	return render(request, 'flatterpages/edit-page.html', {
 		'form': form,
 		'user_templates': user_templates,
 		'page': instance,
@@ -90,7 +90,7 @@ def create_sub_page(request, url):
 			'last_updated_by': request.user,
 			})
 
-	return render(request, 'edit-page.html', {
+	return render(request, 'flatterpages/edit-page.html', {
 		'form': form,
 		})
 
@@ -98,7 +98,7 @@ def create_sub_page(request, url):
 def render_page(request, url):
 	page = get_object_or_404(Page, url=url)
 
-	return render(request, 'base.html', {
+	return render(request, 'flatterpages/base.html', {
 		'page': page,
 		})
 
@@ -107,7 +107,7 @@ def render_page(request, url):
 def manage_pages(request):
 	pages = Page.objects.all()
 
-	return render(request, 'manage-pages.html', {
+	return render(request, 'flatterpages/manage-pages.html', {
 		'pages': pages,
 		})
 
@@ -131,7 +131,7 @@ def create_page_template(request):
 	else:
 		form = PageTemplateForm(user=request.user)
 
-	return render(request, 'edit-template.html', {
+	return render(request, 'flatterpages/edit-template.html', {
 		'form': form,
 		})
 
@@ -155,7 +155,7 @@ def create_user_template(request):
 	else:
 		template_form = UserTemplateForm(user=request.user)
 
-	return render(request, 'edit-template.html', {
+	return render(request, 'flatterpages/edit-template.html', {
 		'form': template_form,
 		})
 
@@ -168,7 +168,7 @@ def edit_page_template(request, id):
 		form.save()
 		return redirect(manage_page_templates)
 
-	return render(request, 'edit-template.html', {
+	return render(request, 'flatterpages/edit-template.html', {
 		'form': form,
 		'template': instance,
 		})
@@ -182,7 +182,7 @@ def edit_user_template(request, id):
 		form.save()
 		return redirect(manage_user_templates)
 
-	return render(request, 'edit-template.html', {
+	return render(request, 'flatterpages/edit-template.html', {
 		'form': form,
 		'template': instance,
 		})
@@ -192,7 +192,7 @@ def edit_user_template(request, id):
 def manage_page_templates(request):
 	templates = PageTemplate.objects.all()
 
-	return render(request, 'manage-page-templates.html', {
+	return render(request, 'flatterpages/manage-page-templates.html', {
 		'templates': templates,
 		})
 
@@ -201,7 +201,7 @@ def manage_page_templates(request):
 def manage_user_templates(request):
 	templates = UserTemplate.objects.all()
 
-	return render(request, 'manage-user-templates.html', {
+	return render(request, 'flatterpages/manage-user-templates.html', {
 		'templates': templates,
 		})
 
@@ -231,7 +231,7 @@ def create_stylesheet(request):
 	else:
 		form = StylesheetForm(user=request.user)
 
-	return render(request, 'edit-stylesheet.html', {
+	return render(request, 'flatterpages/edit-stylesheet.html', {
 		'form': form,
 		})
 
@@ -243,7 +243,7 @@ def edit_stylesheet(request, id):
 	if form.is_valid():
 		form.save()
 
-	return render(request, 'edit-stylesheet.html', {
+	return render(request, 'flatterpages/edit-stylesheet.html', {
 		'form': form,
 		})
 
@@ -252,7 +252,7 @@ def edit_stylesheet(request, id):
 def manage_stylesheets(request):
 	stylesheets = Stylesheet.objects.all()
 
-	return render(request, 'manage-stylesheets.html', {
+	return render(request, 'flatterpages/manage-stylesheets.html', {
 		'stylesheets': stylesheets,
 		})
 
@@ -309,12 +309,12 @@ def search(request):
 			elif not page.parent_page and page not in return_pages:
 				return_pages.append(page)
 
-		return render(request, 'manage-pages.html', {
+		return render(request, 'flatterpages/manage-pages.html', {
 			'pages': return_pages,
 			})
 
 	else:
 		# return nothing is query is blank
-		return render(request, 'manage-pages.html', {
+		return render(request, 'flatterpages/manage-pages.html', {
 			'pages': [],
 			})

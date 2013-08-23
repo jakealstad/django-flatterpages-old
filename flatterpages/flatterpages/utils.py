@@ -5,7 +5,7 @@ from os import path, mkdir
 from django.db.models import Q
 
 
-def write_to_file(title, instance, filetype):
+def write_to_file(title, pk, instance, filetype):
     static_url = base.STATIC_URL.lstrip('/')
 
     if filetype == 'html':
@@ -13,17 +13,15 @@ def write_to_file(title, instance, filetype):
         filedir = 'templates/pagetemplates/'
     elif filetype == 'css':
         content = instance.css
-        filedir = static_url + '/css/pages/'
+        filedir = static_url + 'apps/flatterpages/css/pages/'
 
     if not path.isdir(filedir):
         mkdir(filedir)
 
-    filepath = filedir + str(title).lower() + '.' + filetype
+    filepath = filedir + str(title).lower() + '-' + str(pk) + '.' + filetype
     f = open(filepath, 'w')
     f.write(content)
     f.close()
-
-    print filepath
 
     return '/' + filepath
 

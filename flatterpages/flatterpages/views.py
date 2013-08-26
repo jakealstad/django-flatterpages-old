@@ -82,7 +82,7 @@ def create_sub_page(request, url):
             'main_content': instance.main_content,
             'css': instance.css,
             'footer_content': instance.footer_content,
-            # 'sites': instance.sites,
+            'sites': [site.pk for site in instance.sites.all()],
             'comments': instance.comments,
             'parent_page': instance,
             'page_template': instance.page_template,

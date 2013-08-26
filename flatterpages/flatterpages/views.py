@@ -108,7 +108,7 @@ def render_page(request, url):
 @login_required
 def manage_pages(request):
     sites = Site.objects.all()
-    pages = Page.objects.all()
+    pages = Page.objects.all().order_by('title')
 
     # site_list = [site for site in sites]
     # site_list.insert(0, '')
@@ -120,8 +120,8 @@ def manage_pages(request):
 
 
 @login_required
-def delete_page(request, url):
-    page = get_object_or_404(Page, url=url)
+def delete_page(request, url, pk):
+    page = get_object_or_404(Page, url=url, pk=pk)
     page.delete()
 
     return redirect(manage_pages)

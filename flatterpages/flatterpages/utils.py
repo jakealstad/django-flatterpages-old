@@ -18,7 +18,7 @@ def write_to_file(title, pk, instance, filetype):
     if not path.isdir(filedir):
         mkdir(filedir)
 
-    filepath = filedir + str(title).lower() + '-' + str(pk) + '.' + filetype
+    filepath = filedir + str(title).replace(' ', '-').lower() + '-' + str(pk) + '.' + filetype
     f = open(filepath, 'w')
     f.write(content)
     f.close()

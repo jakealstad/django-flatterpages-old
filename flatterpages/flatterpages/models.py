@@ -12,6 +12,7 @@ class PageTemplate(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	last_updated_by = models.ForeignKey(User)
+	path = models.CharField(max_length=200, blank=True, null=True)
 
 	def __unicode__(self):
 		return self.title
@@ -68,7 +69,7 @@ class Page(models.Model):
 		return self.title
 
 	def template(self):
-		return 'pagetemplates/' + str(self.page_template).lower() + '.html'
+		return self.page_template.path
 	
 
 class PageMedia(models.Model):

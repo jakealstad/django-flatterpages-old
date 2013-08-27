@@ -75,7 +75,9 @@ class PageTemplateForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		instance = super(PageTemplateForm, self).save(commit=commit)
-		write_to_file(instance.title, instance, 'html')
+		path = write_to_file(instance.title, instance.pk, instance, 'html')
+		instance.path = path[11:]
+		instance.save()
 
 		return instance
 

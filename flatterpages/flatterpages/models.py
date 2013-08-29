@@ -59,7 +59,7 @@ class Page(models.Model):
 	sites = models.ManyToManyField(Site)
 	comments = models.BooleanField()
 	page_template = models.ForeignKey(PageTemplate)
-	user_template = models.ForeignKey(UserTemplate, blank=True, null=True)
+	user_template = models.ForeignKey(UserTemplate, blank=True, null=True, on_delete=models.SET_NULL)
 	stylesheet = models.ForeignKey(Stylesheet, blank=True, null=True)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

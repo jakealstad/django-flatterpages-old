@@ -6,11 +6,11 @@ from os import path, mkdir, makedirs
 from django.db.models import Q
 
 
-def mkdir_p(path):
+def mkdir_p(filedir):
     try:
-        makedirs(path)
+        makedirs(filedir)
     except OSError as exc:
-        if exc.errno == errno.EEXIST and path.isdir(path):
+        if exc.errno == errno.EEXIST and path.isdir(filedir):
             pass
         else: raise
 

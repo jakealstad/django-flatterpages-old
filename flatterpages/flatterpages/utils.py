@@ -6,14 +6,14 @@ from django.db.models import Q
 
 
 def write_to_file(title, pk, instance, filetype):
-    static_url = base.STATIC_URL.lstrip('/')
+    media_url = base.MEDIA_URL.lstrip('/')
 
     if filetype == 'html':
         content = instance.main_content
         filedir = 'templates/pagetemplates/'
     elif filetype == 'css':
         content = instance.css
-        filedir = static_url + 'apps/flatterpages/css/pages/'
+        filedir = media_url + 'apps/flatterpages/css/pages/'
 
     if not path.isdir(filedir):
         mkdir(filedir)

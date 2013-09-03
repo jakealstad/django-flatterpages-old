@@ -69,7 +69,7 @@ class Page(models.Model):
 		return self.title
 
 	def template(self):
-		return self.page_template.path[11:]
+		return self.page_template.path
 	
 
 class PageMedia(models.Model):

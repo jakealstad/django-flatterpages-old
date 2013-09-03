@@ -20,10 +20,12 @@ def write_to_file(title, pk, instance, filetype):
 
     if filetype == 'html':
         content = instance.main_content
-        filedir = 'templates/pagetemplates/'
+        filedir = media_url + '/apps/flatterpages/templates/pagetemplates/'
+        filename = str(title).lower() + '-' + str(pk) + '.' + filetype
     elif filetype == 'css':
         content = instance.css
         filedir = media_url + '/apps/flatterpages/css/pages/'
+        filename = '/apps/flatterpages/css/pages/' + str(title).lower() + '-' + str(pk) + '.' + filetype
 
     mkdir_p(filedir)
 
@@ -31,8 +33,6 @@ def write_to_file(title, pk, instance, filetype):
     f = open(filepath, 'w')
     f.write(content)
     f.close()
-
-    filename = 'apps/flatterpages/css/pages/' + str(title).lower() + '-' + str(pk) + '.' + filetype
 
     return filename
 

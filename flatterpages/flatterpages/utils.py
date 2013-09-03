@@ -32,7 +32,9 @@ def write_to_file(title, pk, instance, filetype):
     f.write(content)
     f.close()
 
-    return '/' + filepath
+    filename = 'apps/flatterpages/css/pages/' + str(title).lower() + '-' + str(pk) + '.' + filetype
+
+    return filename
 
 
 def normalize_query(query_string,

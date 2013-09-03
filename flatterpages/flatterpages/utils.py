@@ -1,22 +1,31 @@
 import re
-from settings import base
-from os import path, mkdir
+import errno
+from django.conf import settings
+from os import path, mkdir, makedirs
 
 from django.db.models import Q
 
 
+def mkdir_p(path):
+    try:
+        makedirs(path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and path.isdir(path):
+            pass
+        else: raise
+
+
 def write_to_file(title, pk, instance, filetype):
-    media_url = base.MEDIA_URL.lstrip('/')
+    media_url = settings.MEDIA_ROOT
 
     if filetype == 'html':
         content = instance.main_content
         filedir = 'templates/pagetemplates/'
     elif filetype == 'css':
         content = instance.css
-        filedir = media_url + 'apps/flatterpages/css/pages/'
+        filedir = media_url + '/apps/flatterpages/css/pages/'
 
-    if not path.isdir(filedir):
-        mkdir(filedir)
+    mkdir_p(filedir)
 
     filepath = filedir + str(title).lower() + '-' + str(pk) + '.' + filetype
     f = open(filepath, 'w')

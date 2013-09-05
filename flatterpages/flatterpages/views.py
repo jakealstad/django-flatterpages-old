@@ -1,7 +1,9 @@
 import json
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
+from django.db.models.deletion import ProtectedError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import Context, Template
@@ -198,7 +200,7 @@ def edit_user_template(request, id):
 @login_required
 def manage_page_templates(request):
     templates = PageTemplate.objects.all()
-
+    
     return render(request, 'flatterpages/manage-page-templates.html', {
         'templates': templates,
         })
@@ -216,7 +218,11 @@ def manage_user_templates(request):
 @login_required
 def delete_page_template(request, id):
     instance = get_object_or_404(PageTemplate, id=id)
-    instance.delete()
+    try:
+        instance.delete()
+    except ProtectedError:
+        messages.add_message(request, messages.INFO, 'You cannot delete this template because there are pages using it.')
+        return redirect(manage_page_templates)
 
     return redirect(manage_page_templates)
 
@@ -224,7 +230,11 @@ def delete_page_template(request, id):
 @login_required
 def delete_user_template(request, id):
     instance = get_object_or_404(UserTemplate, id=id)
-    instance.delete()
+    try:
+        instance.delete()
+    except ProtectedError:
+        messages.add_message(request, messages.INFO, 'You cannot delete this template because there are pages using it.')
+        return redirect(manage_page_templates)
 
     return redirect(manage_user_templates)
 

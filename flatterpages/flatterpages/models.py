@@ -36,6 +36,8 @@ class UserTemplate(models.Model):
 	title = models.CharField(max_length=100)
 	css = models.TextField()
 	main_content = models.TextField()
+	head_content = models.TextField(blank=True, null=True)
+	footer_content = models.TextField(blank=True, null=True)
 	user = models.ForeignKey(User)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

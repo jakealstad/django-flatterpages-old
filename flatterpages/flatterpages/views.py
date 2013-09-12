@@ -26,7 +26,8 @@ def create_page(request):
                 form.save()
                 form.save_m2m()
                 # redirect to edit view to prevent multiple copies of Page
-                return redirect(edit_page, url=form.data['url'])
+                page_pk = get_object_or_404(Page, url=form.data['url'], sites=form.data['sites']).pk
+                return redirect(edit_page, url=form.data['url'], pk=page_pk)
     else:
         form = PageForm(user=request.user)
 

@@ -25,11 +25,11 @@ def write_to_file(title, pk, instance, filetype):
     elif filetype == 'css':
         content = instance.css
         filedir = media_url + '/apps/flatterpages/css/pages/'
-        filename = '/apps/flatterpages/css/pages/' + str(title).lower() + '-' + str(pk) + '.' + filetype
+        filename = '/apps/flatterpages/css/pages/' + str(title).lower().replace(' ', '') + '-' + str(pk) + '.' + filetype
 
     mkdir_p(filedir)
 
-    filepath = filedir + str(title).lower() + '-' + str(pk) + '.' + filetype
+    filepath = filedir + str(title).lower().replace(' ', '') + '-' + str(pk) + '.' + filetype
     f = open(filepath, 'w')
     f.write(content)
     f.close()

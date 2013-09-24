@@ -51,6 +51,8 @@ def edit_page(request, url, pk):
         elif 'save_and_continue' in form.data:
             form.save()
             form.save_m2m()
+            page_pk = get_object_or_404(Page, url=form.data['url'], sites=form.data['sites']).pk
+            return redirect(edit_page, url=form.data['url'], pk=page_pk)
     
     user_templates = UserTemplate.objects.filter(user=request.user)
 
@@ -73,7 +75,8 @@ def create_sub_page(request, url):
             elif 'save_and_continue' in form.data:
                 form.save()
                 form.save_m2m()
-                return redirect(edit_page, url=form.data['url'])
+                page_pk = get_object_or_404(Page, url=form.data['url'], sites=form.data['sites']).pk
+                return redirect(edit_page, url=form.data['url'], pk=page_pk)
     else:
         instance = get_object_or_404(Page, url=url)
         form = PageForm(initial={
